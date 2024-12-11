@@ -21,16 +21,16 @@ app.use((err, req, res, next) => {
 
 // API routes
 
-app.use('/docqfacts/api/auth', authRoutes);
-app.use('/docqfacts/api/audit', auditRoutes);
-app.use('/docqfacts/api/app', appDataRoutes);
+app.use('/api/auth', authRoutes); //append docufacts for development environment
+app.use('/api/audit', auditRoutes); //append docufacts for development environment
+app.use('/api/app', appDataRoutes); //append docufacts for development environment
 
 // serving the react app and static files
 app.use('/cust-docs', express.static(path.join(__dirname, './customerdata')));
 
-app.use("/docqfacts", express.static(path.join(__dirname, '../../build')));
+app.use("/", express.static(path.join(__dirname, '../../build'))); //append docufacts for development environment
 
-app.get(`/docqfacts/*`, (req, res) => {
+app.get(`/*`, (req, res) => { //append docufacts for development environment
     res.sendFile(path.join(__dirname, '../../build', 'index.html'));
 });
 

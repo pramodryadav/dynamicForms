@@ -1,7 +1,8 @@
-let baseUrl = document.location.origin + document.location.pathname.split("/").slice(0, 2).join("/") + "/";
+let baseUrl = window.location.origin + window.location.pathname.split("/").slice(0, 2).join("/") + "/";
+
 
 export const CONFIG = {
-    "baseURL": `http://192.168.0.20:7614/docqfacts/api`,
+    "baseURL": `${baseUrl}api`,
     "endPoints": {
         "verify-login": "/auth/verify-login",
         "validate-session": "/auth/validate-session",
@@ -18,7 +19,7 @@ export const CONFIG = {
         "get-files": "/audit/get-customer-files",
         "info-form-update": "/audit/info-form-update",
         "get-app-data": "/app/app-data",
-        "update-doc-status":"/audit/update-docs-status",
-        "get-docs-status":"/audit/get-docs-status"
+        "update-doc-status": "/audit/update-docs-status",
+        "get-docs-status": "/audit/get-docs-status"
     }
 }
