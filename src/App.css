@@ -1,0 +1,1050 @@
+/* General Container Styling */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.loginContainer {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url('./assets/images/loginImgbg.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.orange-text {
+  color: orange
+}
+
+.orange-top-border {
+  border-top: 5px solid orange;
+}
+
+.blue-top-border {
+  border-top: 5px solid #0089ff;
+}
+
+.blue-text{
+  color: #0089ff;
+}
+
+.green-top-border {
+  border-top: 5px solid #58c92a;
+}
+
+.green-text {
+  color: #58c92a
+}
+
+/* Login Card Styling */
+
+.loginLeft {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginCard {
+  padding: 40px;
+  max-width: 410px;
+  width: 100%;
+  box-shadow: 0px 0px 5px 1px #ccc;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  background: #fff;
+  margin: 0 15px;
+}
+
+.loaderMainContainer {
+  position: fixed;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.loaderImg {
+  max-width: 85px;
+  filter: grayscale(100%);
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+}
+
+.styledSelect {
+  width: 100%;
+  padding: 7.5px 14px;
+  border-color: #ddd;
+  border-width: 1px;
+  border-radius: 4px;
+  font-size: 15px;
+  color: black;
+  outline-color: #317da5;
+  background-color: #fff;
+}
+
+.styledSelect:focus {
+  border-color: #317da5;
+}
+
+.inputStyle {
+  width: 100%;
+  padding: 8.5px 14px;
+  border-color: #ddd;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 4px;
+  font-size: 15px;
+  color: black;
+  outline-color: #317da5;
+  background-color: #fff;
+}
+
+.fieldContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+}
+
+.loginCard:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.loginLogo {
+  max-width: 275px;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.loginTitle {
+  text-align: center;
+  font-weight: 600;
+  color: #333;
+}
+
+.loginSubtitle {
+  text-align: center;
+  color: #666;
+}
+
+.auditCard {
+  border-radius: 5px;
+  box-shadow: 0px 2px 6px 0px gray;
+  padding: 10px;
+}
+
+.margin-auto {
+  margin: auto;
+}
+
+.padding-20 {
+  padding: 20px;
+}
+
+.hide {
+  display: none;
+}
+
+.backDrop {
+  position: fixed;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.5);
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0
+}
+
+.addCustomerCard2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 5px;
+  box-shadow: 0px 2px 6px 0px gray;
+  padding: 10px;
+  cursor: pointer;
+  width: 100%;
+  height: 150px;
+}
+
+.customerCard1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 6px 0px gray;
+  padding: 10px;
+  cursor: pointer;
+  width: 100%;
+  height: 150px;
+}
+
+.addCustomerCard p {
+  font-size: 34px;
+  text-align: center;
+}
+
+.loginTextField {
+  margin-bottom: 16px;
+  border-radius: 8px;
+}
+
+.loginTextField .MuiOutlinedInput-root {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.loginTextField .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border-color: #ddd;
+}
+
+.loginTextField .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: #aaa;
+}
+
+.loginTextField .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #1a73e8;
+}
+
+/* Button Styling */
+
+.loginButton {
+  margin-bottom: 8px;
+  background-image: linear-gradient(176deg, #30cfd0 0%, #330867 100%);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.loginButton:hover {
+  background-color: #0f5bbd;
+  transform: scale(1.05);
+}
+
+/* Forgot Password and Sign-Up Links */
+
+.loginOptions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+}
+
+.loginCheckbox {
+  margin-right: 16px;
+}
+
+.loginForgotPassword, .loginSignUp {
+  color: #000;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.loginForgotPassword:hover, .loginSignUp:hover {
+  color: #0f5bbd;
+}
+
+.gridPadding {
+  padding: 5px !important;
+}
+
+/* Responsive Adjustments */
+
+@media (max-width: 600px) {
+  .loginCard {
+    padding: 1.5rem;
+  }
+  .loginLogo {
+    max-width: 275px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 960px) {
+  .loginCard {
+    padding: 45px;
+  }
+}
+
+/* Sidebar Styling */
+
+.selectedMenu {
+  color: #7293ff;
+}
+
+.activeLink {
+  border-left: 2px solid #7293ff;
+}
+
+.sidebarLogo {
+  width: 100%;
+  height: auto;
+  max-width: 200px;
+}
+
+.activeLinkSidebar {
+  background-color: #ffffff2b;
+  padding: 8px 16px;
+  border-radius: 0px 20px 20px 0px;
+  height: 45px;
+  border: 1px solid #ccccccab;
+}
+
+.listSidebar {
+  margin-inline-end: 8px;
+  margin-inline-start: 4px;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .loginRight {
+    display: none;
+  }
+}
+
+/* Forgot Password Page Styling */
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
+.forgotPasswordContainer {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+}
+
+.forgotPasswordLeft {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.forgotPasswordLogo {
+  max-width: 150px;
+}
+
+.forgotPasswordCard {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+}
+
+.forgotPasswordTextField, .resetPasswordTextField {
+  margin-bottom: 10px;
+}
+
+.forgotPasswordButton, .resetPasswordButton, .backToLoginButton {
+  margin-top: 20px;
+}
+
+.backToLoginLink {
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* 404 Page Styling */
+
+.page-not-found-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  padding: 16px;
+}
+
+.page-not-found-image {
+  max-width: 500px;
+  height: auto;
+  width: 100%;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.page-not-found-message {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.page-not-found-text {
+  margin-top: 8px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.page-not-found-button {
+  margin-top: 16px;
+  background-image: linear-gradient(25deg, #30cfd0 0%, #330867 100%);
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.page-not-found-button:hover {
+  background-color: #1a5bb8;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* About Us Page Styling */
+
+.aboutContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #e3f0ff;
+}
+
+.align-s-center {
+  align-self: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.aboutUS {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  height: 180px;
+  margin-bottom: 20px;
+}
+
+.processImg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50px;
+  height: auto
+}
+
+.aboutUSBrandContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.appBarLogo {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  width: 100%;
+  height: auto;
+  max-width: 220px;
+}
+
+/* Table Styling */
+
+.MuiTable-root {
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid #bcbcbc;
+}
+
+.header-cell {
+  color: #000;
+  padding: 6px 8px;
+  font-weight: bold;
+  text-align: center;
+  background-color: #f5f5f5;
+}
+
+.actionIcon {
+  font-size: 17px;
+  color: #7a7a7a;
+  border-radius: 5px;
+}
+
+.toolbarContainer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+@media screen and (max-width: 589px) {
+  .toolbarContainer {
+    flex-wrap: wrap;
+    flex-grow: 1;
+  }
+}
+
+.view-cell {
+  padding: 0;
+  width: 60px;
+}
+
+.filterOptionsTooltip {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.filterOptionsTooltipBox {
+  border: 1px solid #8282826b;
+  border-radius: 5px;
+  margin-bottom: 7px;
+  padding: 4px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.tooltipIcon {
+  color: #838383d6;
+  cursor: pointer;
+}
+
+.table-container {
+  padding: 0;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.data-cell {
+  padding: 5px 0;
+  font-size: 14px;
+}
+
+.search-field {
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  padding: 0 8px;
+  margin-left: 16px;
+  height: 34px;
+}
+
+.search-field .MuiInputBase-input {
+  padding: 8px 0;
+}
+
+/* Receipt Dialog Styling */
+
+.reciptToolbar {
+  background-color: #00496f;
+  min-height: 56px;
+}
+
+.editTX {
+  width: 100%;
+}
+
+.justify-end {
+  justify-content: end;
+}
+
+.justify-space-between {
+  justify-content: space-between;
+}
+
+.justify-space-around {
+  justify-content: space-around;
+}
+
+.col-gap-10 {
+  column-gap: 10px;
+}
+
+.row-gap-10 {
+  row-gap: 10px;
+}
+
+.direction-column {
+  flex-direction: column;
+}
+
+.editTXCell {
+  padding: 5px 0px;
+  border-bottom: 1px solid #ddd;
+}
+
+.status-completed {
+  background-color: #c0ebca;
+  color: #1c7800;
+}
+
+.status-pending {
+  background-color: #cdd4ff;
+  color: #3953ff;
+}
+
+.status-failed {
+  background-color: #f8d7da;
+  color: #e10000;
+}
+
+.status-completed, .status-failed, .status-pending {
+  padding: 4px;
+  border-radius: 15px;
+  font-size: 10px;
+  display: inline-block;
+  width: 85px;
+  text-align: center;
+}
+
+.status-cell {
+  width: 85px;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .icon-container {
+    width: 100%;
+  }
+}
+
+/* About */
+
+.Aboutheading {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.aboutLogo {
+  max-width: 250px;
+  height: auto;
+}
+
+.infoContainer {
+  display: flex;
+  padding: 15px;
+}
+
+.aboutCard {
+  /* background-image: url('../../assets/images/aboutUs.jpg');  */
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 0px #ccc;
+}
+
+.aboutCard:hover {
+  /* border: 2px solid #0044eb; */
+  box-shadow: #00155142 -2px 10px 13px 4px;
+}
+
+.aboutCardIcon {
+  font-size: 60px;
+  color: #0044eb;
+  background-color: #0044eb26;
+  padding: 3px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.abtBackIcon {
+  font-size: 39px;
+  color: white;
+  cursor: pointer;
+  background: #ffffff6e;
+  border-radius: 50px;
+  padding: 4px;
+  margin-top: -12px;
+}
+
+.abtBackIcon:hover {
+  font-size: 39px;
+  color: black;
+  cursor: pointer;
+  background: #fff;
+  border-radius: 50px;
+  padding: 4px;
+  margin-top: -12px;
+}
+
+.headingBackIcon {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.aboutUSContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* profile */
+
+.profileContainer {
+  box-shadow: 0px 0px 10px 0px #ccc
+}
+
+.profileBgImg {
+  width: 100%;
+  height: 220px;
+  filter: brightness(1) hue-rotate(354deg);
+}
+
+.profileSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -75px;
+  text-align: center;
+}
+
+.profilePhoto {
+  width: 120px;
+  height: 120px;
+  border: 4px solid #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profileName {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+.buttonSection {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 10px;
+}
+
+.addProfileBtn {
+  /* background-image: linear-gradient(45deg, #331870, #31b9c4); */
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.changeProfileBtn {
+  padding: 10px 20px;
+  border-radius: 20px;
+  margin-right: 10px;
+  color: #007bff;
+  border-color: #007bff;
+}
+
+.profileDetailsContainer {
+  padding: 15px 10px
+}
+
+.formSection {
+  padding: 5px;
+}
+
+.formSection .MuiTypography-body1 {
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.formButtons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.cancelBtn {
+  border-color: #d9534f;
+  color: #d9534f;
+}
+
+.updateBtn {
+  background-image: linear-gradient(45deg, #331870, #31b9c4);
+  color: white;
+}
+
+.profileImg {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 10px;
+  border: 4px solid #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.userRole {
+  color: gray;
+}
+
+.profileActions {
+  text-align: end;
+}
+
+.profileBtn {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.profileDetails {
+  padding: 20px;
+  background-color: #fffefe;
+  border-radius: 8px;
+}
+
+.formButtons {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.cancelBtn {
+  margin-right: 10px;
+}
+
+@media (max-width: 600px) {
+  .profileActions {
+    display: flex;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .profileSection {
+    margin-top: -40px;
+  }
+  .buttonSection {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .addProfileBtn, .changeProfileBtn {
+    width: 100%;
+    padding: 8px;
+  }
+  .formButtons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* Form css */
+
+.formStyle {
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+
+.textAreafield {
+  max-width: 100%;
+  padding: 4px 14px;
+  outline: none;
+  border-width: 1px;
+  border-radius: 4px;
+  border-color: #ced4da
+}
+
+.form-field:hover {
+  border-color: #30cfd0;
+}
+
+.addCustomerCardContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.addIcon {
+  color: #6242bd;
+}
+
+.customerCard {
+  padding: 15px;
+  border-radius: 5px;
+  /* background: #9083ff24; */
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 10px;
+  box-shadow: 0px 0px 6px 0px #ccc;
+  cursor: pointer;
+  width: 100%;
+  position: relative;
+}
+
+.addCustomerCard {
+  border: 1px dashed #705ebd;
+  padding: 15px;
+  border-radius: 5px;
+  row-gap: 10px;
+  width: 100%;
+  box-shadow: 0px 2px 6px 0px gray;
+  cursor: pointer;
+  height: 127px
+}
+
+.customerCard:hover, .addCustomerCard:hover {
+  /* background-image: linear-gradient(45deg, #e3d9ff, #e0d5ff); */
+  box-shadow: 5px 5px 5px 0px #ccc;
+  transform: translate(0px, -5px);
+}
+
+.docImage {
+  max-width: 150px;
+  height: auto;
+  border-radius: 2px;
+  width: 100%;
+}
+
+.customerCard:hover .customerName {
+  color: #6242bd;
+}
+
+
+
+.editIcon {
+  color: #ffffff;
+  background-color: #6242bd;
+  border-radius: 5px;
+  padding: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.editIcon:hover {
+  background-color: #6242bd;
+}
+
+.customersContainer {
+  padding: 20px;
+}
+
+.stepper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+}
+
+.checkIconStepper {
+  color: green;
+  width: 26px;
+  height: 26px;
+}
+
+@media (max-width: 768px) {
+  .customersContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.success-msg-box {
+  background-color: #6242bd29;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  text-align: center;
+  width: 600px;
+  border: 1px solid #6242bd;
+  margin: 20px auto;
+}
+
+.success-icon-circle {
+  background-color: #4caf50;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.done-icon {
+  color: white;
+  font-size: 2rem;
+  opacity: 0;
+  transform: scale(0.2);
+}
+
+.check-animation {
+  animation: checkMarkAppear 0.9s ease-out forwards;
+}
+
+@keyframes checkMarkAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.6);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.success-msg-text {
+  font-size: 1.2rem;
+  color: #004d40;
+  margin-bottom: 20px;
+}
+
+.home-button {
+  background-color: #7742bd;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.home-button:hover {
+  background-color: #6242bd;
+}

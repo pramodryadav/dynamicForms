@@ -1,0 +1,136 @@
+import React, { useState } from 'react';
+import { Grid, TextField, Button, Checkbox, FormControlLabel, Typography, Card, CardContent, InputAdornment, IconButton } from '@mui/material';
+import about from '../../assets/images/aboutUs.jpg';
+
+
+function About() {
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
+
+    return (
+        <Grid container className="loginContainer" direction="column">
+            <Grid item xs={12} md={6} className="aboutImage">
+                <img src={about} alt="Login Visual" className="loginImage" />
+            </Grid>
+            <Grid item xs={12} md={6} className="loginLeft">
+                <Grid container direction="column" alignItems="center" spacing={2} className="loginContent">
+                <Grid item xs={12} md={6}>
+                        <Card className="aboutCard">
+                            <CardContent>
+                                <Typography variant="h5" gutterBottom>
+                                    Our Mission
+                                </Typography>
+                                <Typography variant="body1" paragraph>
+                                    Our mission is to provide top-notch, user-friendly web applications that empower our clients to achieve their goals efficiently. We strive to innovate continually, ensuring that our solutions remain at the cutting edge of technology.
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                        <Card className="aboutCard">
+                            <CardContent>
+                                <Typography variant="h5" gutterBottom>
+                                    Our Vision
+                                </Typography>
+                                <Typography variant="body1" paragraph>
+                                    We envision a world where technology seamlessly integrates into everyday life, simplifying tasks and fostering greater productivity. Our goal is to be a leader in the web application industry, recognized for our dedication to excellence and customer satisfaction.
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                        <Card className="aboutCard">
+                            <CardContent>
+                                <Typography variant="h5" gutterBottom>
+                                    Meet the Team
+                                </Typography>
+                                <Typography variant="body1" paragraph>
+                                    Our team is composed of talented professionals passionate about technology and innovation. Each member brings a unique set of skills and experiences to the table, enabling us to create high-quality web applications.
+                                    <br />
+                                    - **[Name]** - CEO & Founder: [Brief bio]
+                                    <br />
+                                    - **[Name]** - CTO: [Brief bio]
+                                    <br />
+                                    - **[Name]** - Lead Developer: [Brief bio]
+                                    <br />
+                                    - **[Name]** - UX/UI Designer: [Brief bio]
+                                    <br />
+                                    - **[Name]** - Marketing Manager: [Brief bio]
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                        <Card className="aboutCard">
+                            <CardContent>
+                                <Typography variant="h5" gutterBottom>
+                                    Get in Touch
+                                </Typography>
+                                <Typography variant="body1" paragraph>
+                                    We'd love to hear from you! Whether you have a question about features, pricing, or anything else, our team is ready to answer all your questions.
+                                    <br />
+                                    <strong>Email:</strong> [Your Email]
+                                    <br />
+                                    <strong>Phone:</strong> [Your Phone Number]
+                                    <br />
+                                    <strong>Address:</strong> [Your Office Address]
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            
+    );
+}
+
+export default About;
+
+.aboutImage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+}
+
+
+
+.aboutCards {
+  margin-top: 20px;
+
+}
+
+.aboutCard {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-left: 3px solid #79828f;
+  line-height: 17px;
+}
+
+.aboutCard:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+  margin-bottom: 16px;
+}
+
+p {
+  margin-bottom: 16px;
+}

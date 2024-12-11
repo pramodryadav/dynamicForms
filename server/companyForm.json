@@ -1,0 +1,174 @@
+{
+	"source": {
+		"type": "sql",
+		"table": "profiletbl",
+		"where": ["md5(id)"]
+	},
+	"forcefill": {
+	    "groupuid":"#SESS_GROUP_NAME#",
+        "guid":"#SESS_GUID#",
+        "type":"customer",
+        "company_id":"#COMP_ID#"
+	},
+	"gotolink":"infoview/profile.customer/{hashid}?",
+	"script":"profile",
+	"fields": {
+		"full_name": {
+			"label": "Name",
+			"group": "Info",
+			"required": true
+		},
+		"organization": {
+			"label": "Partner",
+			"group": "Info",
+			"type": "dataSelectorFromTable",
+			"table": "profiletbl_organisation",
+			"columns": "organization as title,id as value",
+			"where": {
+				"blocked": "false",
+				"company_id":"#COMP_ID#"
+			},
+			"no-option":"Select Partner",
+			"required": false
+		},
+		
+		"category":{
+		    "label": "Category",
+			"group": "Info",
+			"type": "dataSelectorFromTable",
+			"table": "do_lists",
+			"columns": "title as title,value as value",
+			"where": {
+				"blocked": "false",
+		        "groupid":"profile_category",
+				"company_id":"#COMP_ID#"
+			},
+			"required": true
+		},
+		"email1": {
+			"label": "Email",
+			"group": "Info",
+			"type": "email",
+            "required":true
+		},
+		"email2": {
+			"label": "Alternate Email",
+			"group": "Info",
+			"type": "email"
+		},
+		"mobile": {
+			"label": "Mobile",
+			"group": "Info",
+			"type": "phone",
+            "required":true,
+			"minlength":10,
+			"maxlength":10
+		},
+		"mobile_others": {
+			"label": "Phone",
+			"group": "Info",
+			"type": "phone",
+			"minlength":10,
+			"maxlength":10
+		},
+		"pan": {
+			"label": "PAN No.",
+			"required":true,
+			"group": "Info",
+			"autocomplete":"off",
+			"width": 6
+		},
+		"gst": {
+			"label": "GST No.",
+			"required": true,
+		    "group": "Info",
+		    "autocomplete":"off",
+		    "width": 6
+		},
+		"assigned_to": {
+			"label": "Assigned To",
+			"group": "Info",
+			"type": "dataSelectorFromTable",
+			"multiple":false,
+			"table": "staff_tbl",
+            "columns": "full_name as title,loginid as value",
+            "where":{
+                   "blocked": "false",
+                   "loginid !=''":"RAW",
+                   "company_id":"#COMP_ID#"
+            },
+			"required": false,
+			"width":6
+		},
+		"demography": {
+			"label": "Demography",
+			"group": "Info",
+			"type": "dataSelector",
+            "groupid":"country",
+			"width": 6
+		},
+		"website": {
+			"label": "Website",
+			"group": "Info",
+			"type": "url",
+			"width": 6
+		},
+		"profile_code": {
+			"label": "Client CRN",
+			"group": "Info",
+			"type": "text",
+			"required":true,
+			"width": 6
+		},
+		"owner": {
+			"label": "Owner",
+			"group": "Info",
+			"width": 6
+		},
+		"dob": {
+			"label": "DOB",
+			"group": "Info",
+			"type":"date",
+			"width": 6
+		},
+		"blood_group": {
+			"label": "Blood Group",
+			"group": "Info",
+			"type":"dataSelector",
+			"groupid":"profile_bloodgroup"
+		},
+		"fax": {
+			"label": "Fax",
+			"group": "Info",
+			"width": 6
+		},
+		"tags": {
+			"label": "Tags",
+			"group": "Info",
+			"type": "tags",
+			"width": 6
+		},
+		"remarks": {
+			"label": "Remarks",
+			"group": "Info",
+			"type": "textarea",
+			"width": 12
+		},
+		"blocked": {
+			"label": "Blocked",
+			"group": "Info",
+			"type": "dataSelector",
+		    "groupid":"boolean",
+			"vmode":"edit",
+			"required": false
+		},
+		"blacklist": {
+			"label": "Blacklisted",
+			"group": "Info",
+			"type": "dataSelector",
+		    "groupid":"boolean",
+			"vmode":"edit",
+			"required": false
+		}
+	}
+}
