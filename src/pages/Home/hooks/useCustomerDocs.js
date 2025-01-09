@@ -9,6 +9,8 @@ const useCustomerDocs = (next, preResponse) => {
    const [loading, setLoading] = useState(false);
    const [docForm, setDocForm] = useState({});
    const [custDocs, setCustDocs] = useState({});
+   const [buttonClicked, setButtonClicked] = useState("");
+   const [showConfirm, setShowConfirm] = useState(false);
 
    useEffect(() => {
 
@@ -64,9 +66,28 @@ const useCustomerDocs = (next, preResponse) => {
          validationSchema
       ),
       onSubmit: async (values) => {
-         updateDocumentStatus()
+
+         if (buttonClicked === "draft") {
+            updateDocumentStatus()
+         } else if (buttonClicked === "next") {
+
+            setShowConfirm(true);
+
+         }
+
       }
    });
+
+   const onConfirm = async () => {
+      try {
+         setShowConfirm(false);
+         await updateDocumentStatus();
+         next({});
+      } catch (error) {
+
+      }
+
+   }
 
    const updateDocumentStatus = async () => {
       try {
@@ -76,7 +97,9 @@ const useCustomerDocs = (next, preResponse) => {
          }
          setLoading(true);
          const res = await updateDocStatus(params);
-         next({});
+         setLoading(false);
+
+
       } catch (error) {
          setLoading(false);
       }
@@ -135,7 +158,9 @@ const useCustomerDocs = (next, preResponse) => {
       }
    }
 
-
+const closeModal = () => {
+   setShowConfirm(false);
+}
 
 
    return {
@@ -144,7 +169,10 @@ const useCustomerDocs = (next, preResponse) => {
       loading,
       onChange,
       custDoucments,
-      baseUrl
+      setButtonClicked,
+      onConfirm,
+      showConfirm,
+      closeModal
    }
 }
 

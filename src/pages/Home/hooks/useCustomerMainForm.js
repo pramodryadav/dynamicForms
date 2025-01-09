@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { getToastOptions } from "../../../utilities/generateToasOptions";
 
 const useMainForm = (next, preResponse) => {
-
+    const [buttonClicked, setButtonClicked] = useState("");
     const [auditForm, setAuditForm] = useState(null);
     const [categories, setCategories] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -73,6 +73,7 @@ const useMainForm = (next, preResponse) => {
         ),
         onSubmit: async (values) => {
             try {
+               
                 if (preResponse.id) {
                     values["edited_by"] = "root";
                     values["edited_on"] = dayjs().format("YYYY-MM-DD HH:mm:ss");
@@ -85,18 +86,31 @@ const useMainForm = (next, preResponse) => {
                     values["edited_by"] = "root";
                     values["edited_on"] = dayjs().format("YYYY-MM-DD HH:mm:ss");
                 }
-               
+
                 setLoading(true);
-                const res = preResponse.id ? await updateMainForm(values) : await submitMainForm(values);
-                setLoading(false);
-                next(res.data.data);
+                    const res = preResponse.id ? await updateMainForm(values) : await submitMainForm(values);
+                    setLoading(false);
+
+              
+                if (buttonClicked === "draft") {
+                    // Handle save as draft logic
+                } else if (buttonClicked === "next") {
+
+
+
+                    
+                    next(res.data.data);
+
+                }
+
             } catch (error) {
                 toast.error(error.message, toastOptions)
                 setLoading(false);
             }
+
         }
     });
-    
+
     // fetch form and value for field categroy together
 
     const fetchMainForm = async () => {
@@ -126,6 +140,7 @@ const useMainForm = (next, preResponse) => {
         loading,
         openBackdrop,
         formik,
+        setButtonClicked,
 
     }
 }

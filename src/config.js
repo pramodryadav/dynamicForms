@@ -2,7 +2,7 @@ let baseUrl = window.location.origin + window.location.pathname.split("/").slice
 
 
 export const CONFIG = {
-    "baseURL": `${baseUrl}api`,
+    "baseURL": `http://192.168.0.20:7614/docufacts/api`,
     "endPoints": {
         "verify-login": "/auth/verify-login",
         "validate-session": "/auth/validate-session",
@@ -20,6 +20,7 @@ export const CONFIG = {
         "info-form-update": "/audit/info-form-update",
         "get-app-data": "/app/app-data",
         "update-doc-status": "/audit/update-docs-status",
-        "get-docs-status": "/audit/get-docs-status"
+        "get-docs-status": "/audit/get-docs-status",
+        "list-projects":"/project/list-projects"
     }
 }

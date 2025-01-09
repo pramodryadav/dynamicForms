@@ -1,11 +1,12 @@
 import React from 'react';
 
 
-import { Grid, Button, Typography } from '@mui/material';
+import { Grid, Button, Typography, Box } from '@mui/material';
 import Loader from '../../../components/Loader';
 import useCustomerDocs from '../hooks/useCustomerDocs';
 import DynamicForm from '../../../components/DynamicForm';
 import { capitalizeString } from '../../../utilities/capitalizeString';
+import Modal from '../../../components/Modal';
 
 const CustomerDocs = ({ back, next, preResponse }) => {
     const { formik,
@@ -13,7 +14,11 @@ const CustomerDocs = ({ back, next, preResponse }) => {
         onChange,
         loading,
         custDoucments,
-        baseUrl } = useCustomerDocs(next, preResponse)
+        setButtonClicked,
+        onConfirm,
+        showConfirm,
+        closeModal
+    } = useCustomerDocs(next, preResponse)
 
     return (
         <>
@@ -42,19 +47,45 @@ const CustomerDocs = ({ back, next, preResponse }) => {
                     }
                     <Grid item xs={12} display="flex" justifyContent="space-between">
                         <Button variant="contained" onClick={back}>Previous</Button>
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            color="primary"
-
-                        >
-                            Submit
-                    </Button>
+                        <Box display="flex" columnGap={1}>
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                onClick={() => setButtonClicked("draft")}
+                            >
+                                save as draft
+                        </Button>
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                onClick={() => setButtonClicked("next")}
+                            >
+                                Final Submit
+                        </Button>
+                        </Box>
                     </Grid>
 
                 </Grid>
 
             </form>
+            <Modal open={showConfirm} showCloseIcon={false} showTitle={false} handleClose={closeModal} maxWidth="xs" >
+                            <Box className="flex justifyC-center direction-column row-gap-10">
+
+
+                              
+                                <Typography textAlign="center">
+                                   This is a final submit. Once submitted , documents cannot be modified.<br /> Are you sure ?
+                            </Typography>
+                            <Box display="flex" justifyContent="center" columnGap={1}>
+                            <Button onClick={closeModal} variant="outlined">Cancel</Button>
+                            <Button onClick={onConfirm} variant="contained">Yes</Button>
+                            </Box>
+                                
+                                
+                            </Box>
+                        </Modal>
         </>
     )
 }

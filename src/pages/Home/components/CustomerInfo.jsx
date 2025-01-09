@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Grid, Button } from '@mui/material';
+import { Grid, Button, Box } from '@mui/material';
 import Loader from '../../../components/Loader';
 import useCustomerInfo from "../hooks/useCustomerInfo"
 import DynamicForm from '../../../components/DynamicForm';
@@ -12,7 +12,8 @@ const CustomerInfo = ({ back, next, preResponse }) => {
         infoForm,
         loading,
         openBackdrop,
-         } = useCustomerInfo(next, preResponse)
+        setButtonClicked
+    } = useCustomerInfo(next, preResponse)
     return (
         <>
             <Loader open={loading} />
@@ -25,18 +26,29 @@ const CustomerInfo = ({ back, next, preResponse }) => {
 
                         config={infoForm}
                         formik={formik}
-                        
+
                     />
                     <Grid item xs={12} display="flex" justifyContent="space-between">
                         <Button variant="contained" onClick={() => back(preResponse)}>Previous</Button>
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            color="primary"
+                        <Box display="flex" columnGap={1}>
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                onClick={() => setButtonClicked("draft")}
+                            >
+                                save as draft
+                        </Button>
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                onClick={() => setButtonClicked("next")}
+                            >
+                                save & Next
+                        </Button>
+                        </Box>
 
-                        >
-                            Next
-                    </Button>
                     </Grid>
 
                 </Grid>

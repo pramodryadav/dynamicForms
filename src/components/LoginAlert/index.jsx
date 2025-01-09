@@ -12,7 +12,7 @@ const LoginAlert = ({ open, title, message, handleClose, login, localAppData, lo
     return (
         <Modal open={open} showCloseIcon={false} showTitle={false} handleClose={handleClose} maxWidth="xs">
             <Box className="welcome-container flex direction-column row-gap-10 padding-10">
-                <div className="flex direction-column justifyC-center alignI-center">
+                <div className="flex direction-column justify-center alignI-center">
                     <img src={brandLogo} className="appImage" />
                     <Typography className="app-label alignS-center">DocuFacts</Typography>
                 </div>

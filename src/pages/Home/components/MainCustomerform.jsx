@@ -5,15 +5,16 @@ import useCustomerMainForm from '../hooks/useCustomerMainForm';
 import Loader from '../../../components/Loader';
 import BackDrop from '../../../components/BackDrop';
 
-function MainCustomerForm({ next,preResponse }) {
+function MainCustomerForm({ next, preResponse }) {
 
     const {
         auditForm,
         categories,
         loading,
         openBackdrop,
-        formik
-    } = useCustomerMainForm(next,preResponse);
+        formik,
+        setButtonClicked
+    } = useCustomerMainForm(next, preResponse);
 
     return (
         <>
@@ -24,19 +25,28 @@ function MainCustomerForm({ next,preResponse }) {
                 <Grid container item xs={12} lg={8} className="auditCard" rowSpacing={1} columnSpacing={1}>
 
                     <DynamicForm
-                       
+
                         config={auditForm}
                         categories={categories}
                         formik={formik}
                     />
-                    <Grid item xs={12} display="flex" justifyContent="end">
+                    <Grid item xs={12} display="flex" justifyContent="end" columnGap={1}>
+
                         <Button
                             type="submit"
                             variant="contained"
                             color="primary"
-                            
+                            onClick={() => setButtonClicked("draft")}
                         >
-                            Next
+                            save as draft
+                        </Button>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            onClick={() => setButtonClicked("next")}
+                        >
+                            save & Next
                         </Button>
                     </Grid>
 

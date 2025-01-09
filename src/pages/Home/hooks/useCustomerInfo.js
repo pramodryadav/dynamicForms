@@ -12,7 +12,7 @@ const useCustomerInfo = (next, preResponse) => {
     const [infoForm, setInfoForm] = useState({});
     const [custInfo, setCustInfo] = useState({});
     const [openBackdrop, setOpenBackdrop] = useState(false);
-
+    const [buttonClicked, setButtonClicked] = useState("");
     const toastOptions = getToastOptions(onChangeToast);
 
     function onChangeToast(value) {
@@ -93,7 +93,13 @@ const useCustomerInfo = (next, preResponse) => {
                 setLoading(true);
                 const res = await updateInfoForm(params);
                 setLoading(false);
-                next(res.data.data);
+                if (buttonClicked === "draft") {
+                    // Handle save as draft logic
+                } else if (buttonClicked === "next") {
+                    next(res.data.data);
+
+                }
+
             } catch (error) {
                 setLoading(false);
                 toast.error(error.message, toastOptions)
@@ -107,7 +113,8 @@ const useCustomerInfo = (next, preResponse) => {
         formik,
         infoForm,
         loading,
-        openBackdrop
+        openBackdrop,
+        setButtonClicked
     }
 }
 

@@ -44,7 +44,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
 }
 ],
-{basename:"/docqfacts",
+{basename:"/docufacts",
 }
 );
 

@@ -7,6 +7,7 @@ const path = require('path');
 const authRoutes = require("./routes/authRoutes");
 const auditRoutes = require("./routes/auditRoutes");
 const appDataRoutes = require("./routes/appDataRoutes");
+const projectRoutes = require("./routes/projectRoutes");
 const connectDB = require("./config/db")
 
 const app = express();
@@ -21,16 +22,17 @@ app.use((err, req, res, next) => {
 
 // API routes
 
-app.use('/api/auth', authRoutes); //append docufacts for development environment
-app.use('/api/audit', auditRoutes); //append docufacts for development environment
-app.use('/api/app', appDataRoutes); //append docufacts for development environment
+app.use('/docufacts/api/auth', authRoutes); //append docufacts for development environment
+app.use('/docufacts/api/audit', auditRoutes); //append docufacts for development environment
+app.use('/docufacts/api/app', appDataRoutes); //append docufacts for development environment
+app.use('/docufacts/api/project',projectRoutes) //append docufacts for development environment
 
 // serving the react app and static files
 app.use('/cust-docs', express.static(path.join(__dirname, './customerdata')));
 
-app.use("/", express.static(path.join(__dirname, '../../build'))); //append docufacts for development environment
+app.use("/docufacts/", express.static(path.join(__dirname, '../../build'))); //append docufacts for development environment
 
-app.get(`/*`, (req, res) => { //append docufacts for development environment
+app.get(`/docufacts/*`, (req, res) => { //append docufacts for development environment
     res.sendFile(path.join(__dirname, '../../build', 'index.html'));
 });
 

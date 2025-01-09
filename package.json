@@ -1,7 +1,7 @@
 {
-  "name": "Docqfacts",
+  "name": "Docufacts",
   "version": "0.1.0",
-  "homepage": "/docqfacts",
+  "homepage": "/docufacts",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.13.0",

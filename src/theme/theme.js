@@ -69,7 +69,13 @@ const getDesignTokens = (mode) => ({
             ]
         },
 
-
+        "MuiDrawer": {
+            "styleOverrides": {
+                "paper": {
+                    backgroundColor:"#6242bd"
+                }
+            }
+        }
     },
   
 

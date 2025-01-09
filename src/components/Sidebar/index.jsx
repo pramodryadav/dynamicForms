@@ -38,8 +38,8 @@ function ResponsiveDrawer() {
 
     const drawer = (
         <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-            <Typography variant="h6" sx={{ my: 2 }}>
-            Docu Facts
+            <Typography variant="h6" sx={{ color:"#fff",my: 2 }}>
+                DocuFacts
           </Typography>
             <Divider />
             <List>
@@ -47,7 +47,7 @@ function ResponsiveDrawer() {
                 {filteredNavs.map((item) => (
                     <ListItem onClick={item.anchorHandle} key={item.title} disablePadding>
                         <ListItemButton sx={{ textAlign: 'center' }}>
-                            <ListItemText primary={item.title} />
+                            <ListItemText sx={{color:"#fff"}} primary={item.title} />
                         </ListItemButton>
                     </ListItem>
                 ))}
@@ -74,7 +74,7 @@ function ResponsiveDrawer() {
                         component="div"
                         sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                     >
-                        Docu Facts
+                        DocuFacts
           </Typography>
                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                         {filteredNavs.map((item) => (

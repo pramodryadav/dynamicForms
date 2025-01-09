@@ -1,10 +1,10 @@
 import React from 'react';
-import { Card, CardContent, Typography, IconButton, Box } from '@mui/material';
+import { Card, Typography, IconButton, Box } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
-const AddCustomerCard = ({ handleClickNewForm }) => {
+const AddCustomerCard = ({ handleClickNewItem }) => {
   return (
-    <Card className="addCustomerCard" onClick={handleClickNewForm}>
+    <Card className="addCustomerCard gray-top-border" onClick={handleClickNewItem}>
       <Box className="flex justify-space-between">
         <Typography variant="h6" className="customerName">
           New Customer

@@ -10,39 +10,6 @@ const useGetCustomers = () => {
 
     }, []);
 
-    const fetchAllCustomers = async () => {
-        try {
-            setLoading(true);
-            const res = await getAllCustomers();
-            setLoading(false);
-
-            fetchAllDocs(res.data.data);
-        } catch (error) {
-            setLoading(false);
-        }
-    }
-
-    const fetchAllDocs = async (consumers) => {
-        try {
-            setLoading(true);
-            const res = await getAllDocsStatus();
-            setLoading(false);
-            const existingDocs = res.data.data;
-            const updatedDocs = consumers.map((consumer) => {
-                const doc = existingDocs.find((doc) => doc.customer_id === consumer.id);
-                if (doc) {
-                    return {
-                        doc_status: doc.status,
-                        ...consumer
-                    }
-                }
-                return consumer
-            })
-            setCustomers(updatedDocs);
-        } catch (error) {
-            setLoading(false);
-        }
-    }
 
     const makeConcurrentRequest = async () => {
         try {
@@ -60,8 +27,8 @@ const useGetCustomers = () => {
                 return map;
             }, {});
 
-            console.log("docStatusMap",docStatusMap);
-            
+            console.log("docStatusMap", docStatusMap);
+
 
             // Map consumers with their corresponding document status
             const updatedConsumers = consumers.map((consumer) => ({
@@ -80,7 +47,7 @@ const useGetCustomers = () => {
 
 
 
-console.log("customers ",customers)
+    console.log("customers ", customers)
 
     return {
         customers,

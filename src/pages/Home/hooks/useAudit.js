@@ -6,7 +6,7 @@ const useAudit = (step) => {
     const [responseData, setResponseData] = useState({});
     const [isProcessing, setIsProcessing] = useState(false);
     const [isCompleted, setIsCompleted] = useState(false);
-    const [showForm, setShowForm] = useState(false);
+    const [isCreateNewItem, setIsCreateNewItem] = useState(false);
 
     const handleNext = (data) => {
 
@@ -15,24 +15,21 @@ const useAudit = (step) => {
 
     };
 
-    console.log("activeStep", activeStep);
-
-
     const handleReset = () => {
 
-        setShowForm(false);
+        setIsCreateNewItem(false);
         setActiveStep(0);
 
     }
 
     const handleClickBack = () => {
-        setShowForm(false);
+        setIsCreateNewItem(false);
         setActiveStep(0);
         setResponseData({});
     }
 
-    const handleClickNewForm = (preRes) => {
-        setShowForm(true);
+    const handleClickNewItem = (preRes) => {
+        setIsCreateNewItem(true);
         setResponseData({});
     }
 
@@ -45,7 +42,7 @@ const useAudit = (step) => {
        
         if (data.doc_status === "new") {
             setResponseData(data);
-            setShowForm(true)
+            setIsCreateNewItem(true)
         }
         if (data.doc_status === "processing") {
             setIsProcessing(true);
@@ -70,8 +67,8 @@ const useAudit = (step) => {
         activeStep,
         handleNext,
         handleClickPrevious,
-        showForm,
-        handleClickNewForm,
+        isCreateNewItem,
+        handleClickNewItem,
         handleClickBack,
         responseData,
         handleClickExistingForm,
