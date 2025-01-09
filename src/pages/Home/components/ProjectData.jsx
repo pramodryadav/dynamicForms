@@ -1,65 +1,55 @@
-import React,{memo} from 'react';
+import React, { memo } from 'react';
 
-import MainCustomerform from './MainCustomerform';
-import CustomerInfo from './CustomerInfo';
-import CustomerDocs from './CustomerDocs';
-import useAudit from '../hooks/useAudit';
+
+import useCreateUpdateSubProjects from '../hooks/useCreateUpdateSubProjects';
 
 import CreatedItems from './CreatedItems';
-import CreateNewItem from './CreateNewItem';
+import CreateUpdateItem from './CreateUpdateItem';
+import Projects from './Projects';
+import Modal from '../../../components/Modal';
 
-const stepsLable = ['Customer', 'Customer Information', "Customer Documents"];
 
-const ProjectData = ({project,backToProjects}) => {
+
+const ProjectData = () => {
     const {
-        activeStep,
-        handleNext,
-        handleClickPrevious,
+
         isCreateNewItem,
         handleClickNewItem,
         handleClickBack,
-        responseData,
-        handleClickExistingForm,
+        subProjectDetail,
+        handleClickExistingItem,
         handleReset,
         handleCloseModal,
         isProcessing,
-        isCompleted
-    } = useAudit(stepsLable);
+        isCompleted,
+        handleSelectProject,
+        selectedProject
+    } = useCreateUpdateSubProjects();
 
-    console.log("project",project);
-    
-
-    const steps = [
-        <MainCustomerform
-            next={handleNext}
-            preResponse={responseData}
-        />,
-        <CustomerInfo preResponse={responseData} next={handleNext} back={handleClickPrevious} />,
-        <CustomerDocs preResponse={responseData} next={handleNext} back={handleClickPrevious} />
-    ];
 
     return (
         <>
-            {isCreateNewItem ? (
-                <CreateNewItem
+            {(subProjectDetail || selectedProject) ? (
+                <CreateUpdateItem
                     handleClickBack={handleClickBack}
-                    activeStep={activeStep}
-                    steps={steps}
-                    stepsLable={stepsLable}
+                    subProjectDetail={subProjectDetail}
                     handleReset={handleReset}
+                    selectedProject={selectedProject}
                 />
             ) : (
                     <CreatedItems
-                        handleClickExistingForm={handleClickExistingForm}
+                        handleClickExistingItem={handleClickExistingItem}
                         handleClickNewItem={handleClickNewItem}
                         handleCloseModal={handleCloseModal}
                         isProcessing={isProcessing}
                         isCompleted={isCompleted}
-                        handleClickBack={backToProjects}
+
                     />
                 )}
 
-
+            <Modal title="Projects" open={isCreateNewItem} handleClose={handleCloseModal} maxWidth="lg">
+                <Projects handleSelectProject={handleSelectProject} />
+            </Modal>
         </>
     );
 };

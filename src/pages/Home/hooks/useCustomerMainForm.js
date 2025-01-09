@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useFormik } from 'formik';
 import * as Yup from "yup";
 import dayjs from "dayjs";
-import { getMainFrom, getCompanyCategories, submitMainForm, getCustomerByID, updateMainForm } from "../../../services/auditform"
+import { getCompanyCategories, submitMainForm, getCustomerByID, updateMainForm } from "../../../services/auditform"
 
 import { initalizeForm } from "../../../utilities/InitializeForm";
 import { updateFormInitialValues } from "../../../utilities/updateFormInitialValues";
@@ -15,30 +15,8 @@ const useMainForm = (next, preResponse) => {
     const [categories, setCategories] = useState(null);
     const [loading, setLoading] = useState(false);
     const [customerData, setCustomerData] = useState({});
-    const [openBackdrop, setOpenBackdrop] = useState(false);
-
-    const toastOptions = getToastOptions(onChangeToast);
-
-    function onChangeToast(value) {
-        setOpenBackdrop(value)
-    }
-
-    useEffect(() => {
-
-        setLoading(true);
-        fetchMainForm()
-            .then((data) => {
-                setLoading(false);
-                const { auditMain: formData, mainFormCategories: categories } = data;
-                const fields = formData.data?.data?.fields || {};
-                setAuditForm(fields);
-                setCategories(categories?.data?.data);
-            })
-            .catch((error) => {
-                setLoading(false);
-
-            });
-    }, []);
+  
+   
 
 
     useEffect(() => {
@@ -113,25 +91,7 @@ const useMainForm = (next, preResponse) => {
 
     // fetch form and value for field categroy together
 
-    const fetchMainForm = async () => {
-        try {
-            const params = {
-                groupid: "organization"
-            }
-            const [auditMainResponse, mainFormCategoriesResponse] = await Promise.all([
-                getMainFrom(),
-                getCompanyCategories(params)
-            ]);
-
-            return {
-                auditMain: auditMainResponse,
-                mainFormCategories: mainFormCategoriesResponse
-            };
-
-        } catch (err) {
-            throw err;
-        }
-    };
+  
 
 
     return {

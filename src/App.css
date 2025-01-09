@@ -16,18 +16,30 @@
 }
 
 .center {
-  height: calc(100vh - 115px);
   display: flex;
   align-items: center;
   justify-content: center;
+  row-gap: 20px;
+  column-gap: 20px;
+  padding: 20px;
 }
 
-.projectContainer{
+.projectDesc {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2
+}
+
+.projectContainer {
   box-shadow: 0px 2px 6px 0px gray;
   border-radius: 15px;
   display: flex;
+  flex-direction: column;
   row-gap: 20px;
-  padding:30px 20px 
+  padding: 20px;
+  cursor: pointer;
 }
 
 .orange-text {
@@ -46,7 +58,7 @@
   border-top: 5px solid #0089ff;
 }
 
-.blue-text{
+.blue-text {
   color: #0089ff;
 }
 
@@ -139,6 +151,25 @@
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
 }
 
+.dialogHeader {
+  height: 45px;
+  background-color: #6242bd;
+  color: white;
+  padding: 5px 6px
+}
+
+.dialogCloseIcon {
+  cursor: pointer;
+  position: absolute;
+  right: 8px;
+  top: 10px;
+  color: #fff;
+}
+
+.position-relative {
+  position: relative;
+}
+
 .loginLogo {
   max-width: 275px;
   display: block;
@@ -183,10 +214,6 @@
   top: 0;
   left: 0
 }
-
-
-
-
 
 .addCustomerCard p {
   font-size: 34px;
@@ -604,6 +631,7 @@
 .alignS-center {
   align-self: center;
 }
+
 .col-gap-10 {
   column-gap: 10px;
 }
@@ -739,7 +767,6 @@
   text-align: center;
 }
 
-
 .welcome-title {
   font-size: 1.1rem;
   font-weight: bold;
@@ -754,7 +781,6 @@
   text-align: center;
   padding: 10px
 }
-
 
 /* profile */
 
@@ -950,7 +976,6 @@
 }
 
 .addCustomerCard {
-  
   padding: 15px;
   border-radius: 5px;
   row-gap: 10px;
@@ -1024,7 +1049,6 @@
 }
 
 .success-msg-box {
- 
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   padding: 30px;

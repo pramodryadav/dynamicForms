@@ -1,6 +1,6 @@
 import React from 'react';
 
-import useProjects from './hooks/useProjects'
+import useProjects from './hooks/useGetProjects'
 import ListProject from './components/Projects'
 import ProjectData from './components/ProjectData'
 import Loader from '../../components/Loader';
@@ -17,25 +17,13 @@ const Projects = () => {
     } = useProjects()
     return (
         <>
-        <Loader open={loading}/>
-            {
-                !selectedProject && <ListProject
-                    projects={projects}
-                    handleChange={handleChange}
-                    selectedProject={selectedProject}
-                />
-            }
 
-            {
-                selectedProject &&
-                <>
-                    
-                    <ProjectData 
-                       project={selectedProject}
-                       backToProjects={handleClickBack}
-                    />
-                </>
-            }
+
+            <ProjectData
+
+            />
+
+
         </>
     )
 }

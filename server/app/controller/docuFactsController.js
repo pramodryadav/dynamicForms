@@ -2,12 +2,10 @@ const formidable = require('formidable');
 const path = require('path');
 const fs = require('fs');
 const {
-    fetchMainForm,
     fetchCompanyCategories,
     insertCustomerData,
     fetchInfoForm,
     fetchDocForm,
-    fetchAllCustomers,
     fetchCustomerByID,
     updateCustomerInfo,
     fetchCustomerInfoByID,
@@ -15,15 +13,26 @@ const {
     fetchFilesByCustomerId,
     uploadFileService,
     updateDocStatus,
-    fetchDocsStatus
-} = require("../services/auditService");
+    fetchProjectDetail,
+    fetchProjects
+} = require("../services/docuFactsServices");
 
 const { uploadSchema } = require("../validations/validationSchema")
 
-const getDocsStatus = async (req, res) => {
+const getProjectDetail = async (req, res) => {
     try {
 
-        const docsStatus = await fetchDocsStatus();
+        const docsStatus = await fetchProjectDetail();
+        res.status(200).json({ status: "success", data: docsStatus });
+
+    } catch (error) {
+        res.status(error.response?.status || 500).json(error.response?.data || { message: 'Internal Server Error' });
+    }
+}
+const getProjects = async (req, res) => {
+    try {
+
+        const docsStatus = await fetchProjects();
         res.status(200).json({ status: "success", data: docsStatus });
 
     } catch (error) {
@@ -31,29 +40,8 @@ const getDocsStatus = async (req, res) => {
     }
 }
 
-const getMainForm = async (req, res) => {
-
-    try {
-
-        const auditForm = await fetchMainForm();
-        res.status(200).json({ status: "success", data: auditForm });
-
-    } catch (error) {
-        res.status(error.response?.status || 500).json(error.response?.data || { message: 'Internal Server Error' });
-    }
-};
 
 
-const getAllCustomers = async (req, res) => {
-    try {
-
-        const result = await fetchAllCustomers();
-        res.status(200).json({ status: "success", data: result });
-
-    } catch (error) {
-        res.status(error.response?.status || 500).json(error.response?.data || { message: 'Internal Server Error' });
-    }
-};
 
 const getCustomerByID = async (req, res) => {
     try {
@@ -245,18 +233,17 @@ const getCustomerFiles = async (req, res) => {
 
 
 module.exports = {
-    getMainForm,
     getCompanyCategories,
     handleMainFormSubmission,
     getInfoForm,
     handleUpdateInfoForm,
     getDocForm,
     uploadFile,
-    getAllCustomers,
     getCustomerByID,
     handleUpdateMainForm,
     getCustomerInfoByID,
     getCustomerFiles,
     updateDocumentStatus,
-    getDocsStatus
+    getProjectDetail,
+    getProjects
 };

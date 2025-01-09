@@ -2,18 +2,7 @@ import { postRequest, getRequest } from "../utilities/httpsRequest";
 import { CONFIG } from "../config";
 const API_ENDPOINTS = CONFIG.endPoints;
 
-const getAllCustomers = async (params = {}) => {
-    try {
 
-        const response = await getRequest(API_ENDPOINTS["get-all-customers"], params);
-        return response;
-
-    } catch (err) {
-        let error = err.response ? err.response.data : err;
-        throw error
-    }
-
-}
 
 const getCustomerByID = async (params = {}) => {
     try {
@@ -57,18 +46,7 @@ const getCustomerInfoByID = async (params = {}) => {
 }
 
 
-const getMainFrom = async (params = {}) => {
-    try {
 
-        const response = await getRequest(API_ENDPOINTS["mainform"], params);
-        return response;
-
-    } catch (err) {
-        let error = err.response ? err.response.data : err;
-        throw error
-    }
-
-}
 
 const updateInfoForm = async (params = {}) => {
     try {
@@ -163,10 +141,10 @@ const getDocFrom = async (params = {}) => {
 
 }
 
-const getAllDocsStatus = async (params = {}) => {
+const getAllProjectsDetail = async (params = {}) => {
     try {
 
-        const response = await getRequest(API_ENDPOINTS["get-docs-status"], params);
+        const response = await getRequest(API_ENDPOINTS["get-projects-detail"], params);
         return response;
 
     } catch (err) {
@@ -192,18 +170,16 @@ const getCompanyCategories = async (params = {}) => {
 
 }
 export {
-    getMainFrom,
     getCompanyCategories,
     submitMainForm,
     getInfoFrom,
     getDocFrom,
     updateInfoForm,
     uploadFile,
-    getAllCustomers,
     getCustomerByID,
     updateMainForm,
     getCustomerInfoByID,
     getCustFilesByID,
     updateDocStatus,
-    getAllDocsStatus
+    getAllProjectsDetail
 }

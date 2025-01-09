@@ -7,14 +7,28 @@ import { Button } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 import SuccessMsg from './SuccessMsg';
+import useStepperForm from '../hooks/useStepperForm';
 
-const CreateNewItem = ({
+
+
+
+
+const CreateUpdateItem = ({
     handleClickBack,
-    activeStep,
-    steps,
-    stepsLable,
-    handleReset
+    handleReset,
+    subProjectDetail,
+    selectedProject
 }) => {
+
+    const {
+        activeStep,
+        stepsLable,
+        steps } = useStepperForm(subProjectDetail);
+        console.log("selectedProject",selectedProject);
+        console.log("subProjectDetail",subProjectDetail);
+        
+ 
+
     return (
         <>
 
@@ -48,4 +62,4 @@ const CreateNewItem = ({
     )
 }
 
-export default CreateNewItem
+export default CreateUpdateItem

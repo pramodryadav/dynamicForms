@@ -5,9 +5,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
 const authRoutes = require("./routes/authRoutes");
-const auditRoutes = require("./routes/auditRoutes");
+const auditRoutes = require("./routes/docuFactsRoutes");
 const appDataRoutes = require("./routes/appDataRoutes");
-const projectRoutes = require("./routes/projectRoutes");
 const connectDB = require("./config/db")
 
 const app = express();
@@ -23,9 +22,8 @@ app.use((err, req, res, next) => {
 // API routes
 
 app.use('/docufacts/api/auth', authRoutes); //append docufacts for development environment
-app.use('/docufacts/api/audit', auditRoutes); //append docufacts for development environment
+app.use('/docufacts/api/docufacts', auditRoutes); //append docufacts for development environment
 app.use('/docufacts/api/app', appDataRoutes); //append docufacts for development environment
-app.use('/docufacts/api/project',projectRoutes) //append docufacts for development environment
 
 // serving the react app and static files
 app.use('/cust-docs', express.static(path.join(__dirname, './customerdata')));

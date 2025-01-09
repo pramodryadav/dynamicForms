@@ -4,22 +4,23 @@ import { Button, Typography } from '@mui/material';
 import Customers from './Customers';
 import Modal from '../../../components/Modal';
 import processingImg from "../../../assets/images/process.png"
+import Projects from './Projects';
 
 const CreatedItems = ({
-    handleClickExistingForm,
+    handleClickExistingItem,
     handleClickNewItem,
     handleCloseModal,
     isProcessing,
     isCompleted,
-    handleClickBack
+
 }) => {
 
     return (
         <>
             <Customers
-                handleClickExistingForm={handleClickExistingForm}
+                handleClickExistingItem={handleClickExistingItem}
                 handleClickNewItem={handleClickNewItem}
-                handleClickBack={handleClickBack}
+
             />
 
             <Modal open={isProcessing} showCloseIcon={false} showTitle={false} handleClose={handleCloseModal} maxWidth="xs" >
@@ -49,6 +50,8 @@ const CreatedItems = ({
                     <Button onClick={handleCloseModal} variant="contained">ok</Button>
                 </Box>
             </Modal>
+         
+
         </>
     )
 }

@@ -3,7 +3,7 @@ import { getProjects } from "../../../services/projectService";
 import { toast } from "react-toastify";
 
 
-const useProjects = () => {
+const useGetProjects = () => {
     const [selectedProject, setSelectedProject] = useState("");
     const [loading, setLoading] = useState(false);
 
@@ -17,7 +17,7 @@ const useProjects = () => {
         try {
             setLoading(true);
             const res = await getProjects();
-            if(res.data.status==="error"){
+            if (res.data.status === "error") {
                 toast.error(res.data.message);
                 return
             }
@@ -39,8 +39,6 @@ const useProjects = () => {
         setSelectedProject("")
     }
 
-    console.log("projects",projects);
-    
 
     return {
         projects,
@@ -51,4 +49,4 @@ const useProjects = () => {
     }
 }
 
-export default useProjects
+export default useGetProjects

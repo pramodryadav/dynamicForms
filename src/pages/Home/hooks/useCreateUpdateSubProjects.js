@@ -1,48 +1,43 @@
 import { useCallback, useState } from "react";
 
-const useAudit = (step) => {
+const useCreateUpdateSubProjects = (step) => {
 
     const [activeStep, setActiveStep] = useState(0);
-    const [responseData, setResponseData] = useState({});
+    const [subProjectDetail, setSubProjectDetail] = useState(null);
     const [isProcessing, setIsProcessing] = useState(false);
     const [isCompleted, setIsCompleted] = useState(false);
     const [isCreateNewItem, setIsCreateNewItem] = useState(false);
+    const [selectedProject, setSelectedProject] = useState(null);
 
-    const handleNext = (data) => {
-
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        setResponseData(data)
-
-    };
+    const handleSelectProject = (project) => {
+        setSelectedProject(project);
+        setIsCreateNewItem(false);
+    }
 
     const handleReset = () => {
 
-        setIsCreateNewItem(false);
-        setActiveStep(0);
+        setSubProjectDetail(null);
+        setSelectedProject(null)
 
     }
 
     const handleClickBack = () => {
-        setIsCreateNewItem(false);
-        setActiveStep(0);
-        setResponseData({});
+
+        setSubProjectDetail(null);
+        setSelectedProject(null)
     }
 
     const handleClickNewItem = (preRes) => {
         setIsCreateNewItem(true);
-        setResponseData({});
+        // setSubProjectDetail(null);
     }
 
-    const handleClickPrevious = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
-    };
 
-    const handleClickExistingForm = (data) => {
-       
+    const handleClickExistingItem = (data) => {
+
         if (data.doc_status === "new") {
-            setResponseData(data);
-            setIsCreateNewItem(true)
+            setSubProjectDetail(data);
         }
         if (data.doc_status === "processing") {
             setIsProcessing(true);
@@ -52,31 +47,31 @@ const useAudit = (step) => {
             setIsCompleted(true);
         }
 
-      
+
 
     }
 
     const handleCloseModal = () => {
         setIsProcessing(false);
         setIsCompleted(false);
+        setIsCreateNewItem(false);
     }
 
 
     return {
 
-        activeStep,
-        handleNext,
-        handleClickPrevious,
         isCreateNewItem,
         handleClickNewItem,
         handleClickBack,
-        responseData,
-        handleClickExistingForm,
+        subProjectDetail,
+        handleClickExistingItem,
         handleReset,
         handleCloseModal,
         isProcessing,
-        isCompleted
+        isCompleted,
+        handleSelectProject,
+        selectedProject
     }
 }
 
-export default useAudit
+export default useCreateUpdateSubProjects

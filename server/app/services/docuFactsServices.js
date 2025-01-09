@@ -3,10 +3,10 @@ const fs = require('fs');
 const connectDB = require("../config/db");
 const { applyDefaultValues } = require("../utils/customerTblDefaultValues");
 
-const fetchDocsStatus = async () => {
+const fetchProjectDetail = async () => {
     try {
         const connection = await connectDB();
-        const [rows] = await connection.execute('SELECT * FROM docs_status');
+        const [rows] = await connection.execute('SELECT * FROM projects_detail');
         await connection.end(); // Close the connection
         return rows;
     } catch (error) {
@@ -14,27 +14,20 @@ const fetchDocsStatus = async () => {
     }
 }
 
-const fetchMainForm = async () => {
-    const formPath = path.join(__dirname, '../../', 'companyForm.json');
 
-    try {
-        const data = await fs.promises.readFile(formPath, 'utf8');
-        return JSON.parse(data);
-    } catch (err) {
-        throw new Error('Audit form not found');
-    }
-}
-
-const fetchAllCustomers = async () => {
+const fetchProjects = async () => {
     try {
         const connection = await connectDB();
-        const [rows] = await connection.execute('SELECT * FROM customer_tbl');
+        const [rows] = await connection.execute('SELECT * FROM data_projects');
         await connection.end(); // Close the connection
         return rows;
     } catch (error) {
         throw new Error(`Error fetching data: ${error.message}`);
     }
 }
+
+
+
 
 const fetchCustomerInfoByID = async (id) => {
     try {
@@ -397,20 +390,19 @@ const uploadFileService = async (file, id, field) => {
 
 
 module.exports = {
-    fetchMainForm,
     fetchCompanyCategories,
     insertCustomerData,
     fetchInfoForm,
     updateCustomerInfo,
     fetchDocForm,
-    fetchAllCustomers,
     fetchCustomerByID,
     updateCustomerData,
     fetchCustomerInfoByID,
     fetchFilesByCustomerId,
     uploadFileService,
     updateDocStatus,
-    fetchDocsStatus
+    fetchProjectDetail,
+    fetchProjects
 
 
 }
