@@ -36,7 +36,6 @@ const CustomerDocs = ({ back, next, preResponse }) => {
 
                     {
                         Object.keys(custDoucments).length > 0 ? Object.keys(custDoucments).map((key) => {
-                            console.log("custDoucments[key]", custDoucments[key]);
 
                             return <Grid key={key} item xs={12} md={6} className="fieldContainer">
                                 <Typography className="form-label" variant="body1" >{capitalizeString(key)} file</Typography>
@@ -70,22 +69,7 @@ const CustomerDocs = ({ back, next, preResponse }) => {
                 </Grid>
 
             </form>
-            <Modal open={showConfirm} showCloseIcon={false} showTitle={false} handleClose={closeModal} maxWidth="xs" >
-                            <Box className="flex justifyC-center direction-column row-gap-10">
-
-
-                              
-                                <Typography textAlign="center">
-                                   This is a final submit. Once submitted , documents cannot be modified.<br /> Are you sure ?
-                            </Typography>
-                            <Box display="flex" justifyContent="center" columnGap={1}>
-                            <Button onClick={closeModal} variant="outlined">Cancel</Button>
-                            <Button onClick={onConfirm} variant="contained">Yes</Button>
-                            </Box>
-                                
-                                
-                            </Box>
-                        </Modal>
+           
         </>
     )
 }

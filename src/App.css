@@ -25,11 +25,14 @@
 }
 
 .projectDesc {
+  font-size: 13px;
+  color: #757575;
+  margin-top: 5px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2
+  -webkit-line-clamp: 2;
 }
 
 .projectContainer {
@@ -195,6 +198,9 @@
 
 .margin-auto {
   margin: auto;
+}
+.m-b-20{
+  margin-bottom: 20px;
 }
 
 .padding-20 {
@@ -980,7 +986,7 @@
   border-radius: 5px;
   row-gap: 10px;
   width: 100%;
-  box-shadow: 0px 2px 6px 0px gray;
+  box-shadow: 0px 2px 6px 0px #ccc;
   cursor: pointer;
   height: 127px
 }
@@ -988,7 +994,7 @@
 .customerCard:hover, .addCustomerCard:hover {
   /* background-image: linear-gradient(45deg, #e3d9ff, #e0d5ff); */
   box-shadow: 5px 5px 5px 0px #ccc;
-  transform: translate(0px, -5px);
+  transform: translate(0px, -2px);
 }
 
 .docImage {
@@ -998,8 +1004,15 @@
   width: 100%;
 }
 
-.customerCard:hover .customerName {
+.customerCard:hover {
   color: #6242bd;
+}
+
+.customerName {
+  font-weight: bold;
+  font-size: 18px;
+  color: rgb(98, 66, 189);
+  text-transform: uppercase;
 }
 
 .appImage {
@@ -1016,12 +1029,62 @@
   transition: background-color 0.3s ease;
 }
 
-.editIcon:hover {
-  background-color: #6242bd;
-}
+/* .editIcon {
+  background-color: rgb(255, 255, 255);
+  color: rgb(98, 66, 189);
+  padding: 15px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  box-shadow: #0000001a 0px 4px 10px;
+} */
 
 .customersContainer {
   padding: 20px;
+}
+
+.projectsContainer {
+  padding: 20px;
+  border-radius: 10px;
+  /* background: 'linear-gradient(135deg, #e3f2fd, #ffffff)', */
+}
+
+.projectTitle {
+  font-size: 20px;
+  font-weight: bold;
+  color: #6242bd
+}
+
+.projectCard {
+  height: 100%;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: rgb(204, 204, 204) 0px 0px 5px 0px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.documentIcon {
+  font-size: 30px;
+  color: #6242bd;
+  margin-bottom: 10px;
+}
+
+.homeICon{
+  font-size: 36px;
+  color: #6242bd;
+  cursor: pointer;
+}
+
+.projectName {
+  font-weight: bold;
+  font-size: 15px;
+  color: #424242
+}
+
+.search-filter-container{
+  box-shadow: 0px 0px 10px 0px #ccc;
+  padding: 20px;
+  border-radius: 4px;
 }
 
 .stepper {

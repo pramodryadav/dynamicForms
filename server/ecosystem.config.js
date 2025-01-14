@@ -1,6 +1,6 @@
 module.exports = {
     apps: [{
-      name: "audit-analytics",
+      name: "docuFacts",
       script: "./server.js",
       env_production: {
         NODE_ENV: "production"

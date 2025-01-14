@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from '@mui/material';
 import DoneIcon from '@mui/icons-material/Done';
+import HomeIcon from '@mui/icons-material/Home';
 
 const SuccessMsg = ({ handleReset }) => {
     return (
@@ -9,13 +10,8 @@ const SuccessMsg = ({ handleReset }) => {
                 <DoneIcon className="done-icon check-animation" />
             </div>
             <p className="success-msg-text">All steps successfully completed!</p>
-            <Button 
-                variant="contained" 
-                className="home-button"
-                onClick={handleReset}
-            >
-                Home
-            </Button>
+            <HomeIcon className="homeICon" onClick={handleReset}/>
+          
         </div>
     );
 }

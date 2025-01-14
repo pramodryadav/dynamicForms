@@ -141,18 +141,7 @@ const getDocFrom = async (params = {}) => {
 
 }
 
-const getAllProjectsDetail = async (params = {}) => {
-    try {
 
-        const response = await getRequest(API_ENDPOINTS["get-projects-detail"], params);
-        return response;
-
-    } catch (err) {
-        let error = err.response ? err.response.data : err;
-        throw error
-    }
-
-}
 
 
 
@@ -181,5 +170,6 @@ export {
     getCustomerInfoByID,
     getCustFilesByID,
     updateDocStatus,
-    getAllProjectsDetail
+
+    
 }

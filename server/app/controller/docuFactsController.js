@@ -13,8 +13,13 @@ const {
     fetchFilesByCustomerId,
     uploadFileService,
     updateDocStatus,
+
     fetchProjectDetail,
-    fetchProjects
+    fetchProjects,
+    fetchProjectForms,
+    insertSubProjectDetail,
+    updateSubProjectDetail,
+    fetchFormData
 } = require("../services/docuFactsServices");
 
 const { uploadSchema } = require("../validations/validationSchema")
@@ -39,6 +44,20 @@ const getProjects = async (req, res) => {
         res.status(error.response?.status || 500).json(error.response?.data || { message: 'Internal Server Error' });
     }
 }
+
+
+const getProjectForms = async (req, res) => {
+    try {
+        const { projectID } = req.query; 
+
+        const docsStatus = await fetchProjectForms(projectID);
+        res.status(200).json({ status: "success", data: docsStatus });
+
+    } catch (error) {
+        res.status(error.response?.status || 500).json(error.response?.data || { message: 'Internal Server Error' });
+    }
+}
+
 
 
 
@@ -106,6 +125,36 @@ const getCompanyCategories = async (req, res) => {
     }
 };
 
+const getFormData = async (req, res) => {
+
+    try {
+      
+        const { order_id, sub_project_id } = req.query;
+        const docForm = await fetchFormData(order_id, sub_project_id);
+        res.status(200).json({ status: "success", data: docForm });
+
+    } catch (error) {
+        res.status(error.response?.status || 500).json(error.response?.data || { status: "error", message: 'Internal Server Error' });
+    }
+};
+
+
+
+const handleFormSubmission = async (req, res) => {
+    try {
+        const formData = req.body; // Assuming form data is in the request body;
+
+        // Call the service to insert the data
+        const result = await insertSubProjectDetail(formData);
+
+        // Send a success response
+        res.status(201).json({ status: "success", message: 'Customer data inserted successfully', data: result });
+    } catch (error) {
+        // Send an error response
+        res.status(500).json({ status: "error", message: `Error: ${error.message}` });
+    }
+};
+
 const handleMainFormSubmission = async (req, res) => {
     try {
         const formData = req.body; // Assuming form data is in the request body;
@@ -134,6 +183,21 @@ const handleUpdateMainForm = async (req, res) => {
         res.status(500).json({ status: "error", message: `Error: ${error.message}` });
     }
 };
+
+const handleFormUpdate = async (req, res) => {
+    try {
+        const formData = req.body; // Assuming form data is in the request body;
+        // Call the service to insert the data
+        const result = await updateSubProjectDetail(formData);
+
+        // Send a success response
+        res.status(201).json({ status: "success", message: 'Customer data updated successfully', data: result });
+    } catch (error) {
+        // Send an error response
+        res.status(500).json({ status: "error", message: `Error: ${error.message}` });
+    }
+};
+
 
 
 
@@ -244,6 +308,11 @@ module.exports = {
     getCustomerInfoByID,
     getCustomerFiles,
     updateDocumentStatus,
+
     getProjectDetail,
-    getProjects
+    getProjects,
+    getProjectForms,
+    handleFormSubmission,
+    getFormData,
+    handleFormUpdate
 };

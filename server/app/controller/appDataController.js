@@ -1,5 +1,5 @@
 const getAppData = async (req, res) => {
-    console.log("req getappData");
+   
     
     try {
 

@@ -7,41 +7,41 @@ import dayjs from 'dayjs'
 import { capitalizeString } from '../../../utilities/capitalizeString';
 
 const border = {
-  processing: "orange-top-border",
-  new: "blue-top-border",
+  in_process: "orange-top-border",
+  draft: "blue-top-border",
   completed: "green-top-border"
 }
 
 const text = {
-  processing: "orange-text",
-  new: "blue-text",
+  in_process: "orange-text",
+  draft: "blue-text",
   completed: "green-text"
 }
 
 const icons = {
-  processing: <InfoIcon fontSize="small" />,
-  new: <EditIcon fontSize="small" />,
+  in_process: <InfoIcon fontSize="small" />,
+  draft: <EditIcon fontSize="small" />,
   completed: <VisibilityIcon fontSize="small" />
 }
 
 const CustomerCard = ({ customer }) => {
 
   return (
-    <Card className={`customerCard ${border[customer?.doc_status]}`}>
+    <Card className={`customerCard ${border[customer?.status]}`}>
 
 
       <Box className="flex justify-space-between">
         <Typography variant="h6" className="customerName">
-          {customer.full_name}
+          {customer.project_title}
         </Typography>
         <IconButton className="editIcon">
-       { icons[customer?.doc_status]}
+       { icons[customer?.status]}
         </IconButton>
 
       </Box>
 
       <Typography variant="body2" className={`customerStatus`}>
-        Status: <span className={`${text[customer?.doc_status]}`}>{capitalizeString(customer.doc_status)}</span>
+        Status: <span className={`${text[customer?.status]}`}>{capitalizeString(customer.status)}</span>
       </Typography>
       <Box className="flex justify-end">
         <Typography variant="body2" className="customerStatus">

@@ -11,8 +11,13 @@ const {
     getCustomerInfoByID,
     getCustomerFiles,
     updateDocumentStatus,
+
     getProjectDetail,
-    getProjects
+    getProjects,
+    getProjectForms,
+    handleFormSubmission,
+    handleFormUpdate,
+    getFormData
 } = require('../controller/docuFactsController');
 
 const {
@@ -23,7 +28,13 @@ const {
     infoFormSchema,
     updateCustomerInfoSchema,
     updateDocStatusSchema,
-    validate } = require("../validations/validationSchema")
+    validate,
+
+    getProjectFormSchema,
+    formSubmissionSchema,
+    getFormDataSchema,
+    formUpdateSchema
+} = require("../validations/validationSchema")
 
 
 const router = express.Router();
@@ -38,8 +49,16 @@ router.post('/info-form-update', validate(updateCustomerInfoSchema), handleUpdat
 router.post('/upload-file', uploadFile);
 router.get('/get-customerById', validate(customerIdSchema, "query"), getCustomerByID);
 router.get('/get-customerInfoById', validate(customerIdSchema, "query"), getCustomerInfoByID);
+
 router.get('/get-customer-files', validate(customerIdSchema, "query"), getCustomerFiles);
 router.post('/update-docs-status', validate(updateDocStatusSchema), updateDocumentStatus);
-router.get('/get-projects-detail',getProjectDetail);
-router.get('/list-projects',getProjects)
+
+router.get('/get-projects-detail', getProjectDetail);
+router.get('/list-projects', getProjects);
+router.get('/project-forms', validate(getProjectFormSchema, "query"), getProjectForms);
+router.post('/submit-form', validate(formSubmissionSchema), handleFormSubmission);
+router.get('/form-json-data', validate(getFormDataSchema,"query"), getFormData);
+router.post('/update-form',validate(formUpdateSchema),handleFormUpdate)
+
+
 module.exports = router;

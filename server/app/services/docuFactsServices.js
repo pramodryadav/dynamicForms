@@ -27,6 +27,41 @@ const fetchProjects = async () => {
 }
 
 
+const fetchProjectForms = async (projectID) => {
+    try {
+        const connection = await connectDB();
+        // Construct the SQL query
+        const query = `
+           SELECT * FROM data_projects_form
+           WHERE data_project_id = ?
+       `;
+        const [rows] = await connection.execute(query, [projectID]);
+        await connection.end(); // Close the connection
+        return rows;
+    } catch (error) {
+        throw new Error(`Error fetching data: ${error.message}`);
+    }
+}
+
+const fetchFormData = async (order_id, sub_project_id) => {
+    try {
+        const connection = await connectDB();
+        // Construct the SQL query
+        const query = `
+           SELECT * FROM project_detail_data
+           WHERE project_detail_id = ?  AND order_id = ? 
+       `;
+        const [rows] = await connection.execute(query, [sub_project_id, order_id]);
+        await connection.end(); // Close the connection
+        return rows[0];
+    } catch (error) {
+        throw new Error(`Error fetching data: ${error.message}`);
+    }
+}
+
+
+
+
 
 
 const fetchCustomerInfoByID = async (id) => {
@@ -222,7 +257,7 @@ const insertCustomerData = async (formData) => {
         const [result] = await connection.execute(query, values);
 
         const { insertId } = result;
-       
+
         await insertDocStatus(insertId, connection);
         await connection.end(); // Close the connection
 
@@ -242,12 +277,12 @@ const insertDocStatus = async (customerId, connection) => {
     try {
         const query = `INSERT INTO docs_status (customer_id, status) VALUES(?, ?)`;
         const values = [customerId, 'new'];
-       
+
         // Execute the query to update the status to "processing"
         await connection.execute(query, values);
 
     } catch (error) {
-        
+
         throw new Error(`Error inserting data: ${error.message}`);
 
     }
@@ -389,6 +424,184 @@ const uploadFileService = async (file, id, field) => {
 
 
 
+
+
+
+
+const insertSubProjectDetail = async (formData) => {
+    let connection;
+    try {
+
+
+        connection = await connectDB();
+       
+         // Construct the SQL query using INSERT ... ON DUPLICATE KEY UPDATE
+         const query = `
+         INSERT INTO projects_detail (
+             data_project_id, project_title, status
+         ) VALUES (?, ?, ?)
+         ON DUPLICATE KEY UPDATE
+             project_title = VALUES(project_title),
+             status = VALUES(status)
+     `;
+
+        // Extract values from formData
+        const values = [
+            formData.data_project_id, formData.project_title, formData.status
+        ];
+
+
+        // Execute the query
+        const [result] = await connection.execute(query, values);
+
+        const { insertId } = result;
+        formData["insertID"] = insertId;
+
+        await insertSubProjectFormData(formData, connection);
+        await connection.end(); // Close the connection
+
+        return { subProjectId: insertId };
+    } catch (error) {
+        if (connection) {
+            await connection.end(); // Ensure connection is closed in case of error
+        }
+        throw new Error(`Error fetching form fields: ${error.message}`);
+
+    }
+};
+
+
+const updateSubProjectDetail = async (formData) => {
+    let connection;
+    try {
+
+       
+
+        connection = await connectDB();
+        // formData = {
+        //     ...applyDefaultValues(formData),
+
+        // };
+
+        // Construct the SQL query
+        const query = `
+            UPDATE projects_detail 
+            SET 
+            project_title=?,status = ?
+            WHERE id = ?
+               
+        `;
+
+        // Extract values from formData
+        const values = [
+            formData.project_title, formData.status, formData.subProjectId
+        ];
+
+       
+        // Execute the query
+        const [result] = await connection.execute(query, values);
+
+
+        await updateSubProjectFormData(formData, connection);
+        await connection.end(); // Close the connection
+
+
+        return { subProjectId: formData.subProjectId };
+    } catch (error) {
+       
+        if (connection) {
+            await connection.end(); // Ensure connection is closed in case of error
+        }
+        throw new Error(`Error fetching form fields: ${error.message}`);
+
+    }
+};
+
+
+const insertSubProjectFormData = async (formData, connection) => {
+    try {
+
+
+
+        // Construct the SQL query
+        const query = `
+            INSERT INTO project_detail_data (
+                project_detail_id, order_id,name,form_json,form_json_data
+            ) VALUES (?, ?, ?, ?, ?)
+        `;
+
+        // Extract values from formData
+        const values = [
+            formData?.insertID, formData.order_id, formData.name, formData.form_json, formData.form_json_data
+        ];
+
+
+
+        // Execute the query
+        await connection.execute(query, values);
+
+
+    } catch (error) {
+        if (connection) {
+            await connection.end(); // Ensure connection is closed in case of error
+        }
+
+
+        throw new Error(`Error fetching form fields: ${error.message}`);
+
+    }
+};
+
+
+
+const updateSubProjectFormData = async (formData, connection) => {
+    try {
+
+    
+
+
+        // formData = {
+        //     ...applyDefaultValues(formData),
+
+        // };
+
+        // Construct the SQL query
+        // const query = `
+        //     UPDATE project_detail_data
+        //     SET
+        //     form_json_data = ?
+        //     WHERE project_detail_id = ?  AND order_id = ?
+        // `;
+
+        // Construct the SQL query using INSERT ... ON DUPLICATE KEY UPDATE
+        const query = `
+          INSERT INTO project_detail_data (project_detail_id, order_id,name,form_json,form_json_data)
+          VALUES (?, ?, ?, ?, ?)
+          ON DUPLICATE KEY UPDATE
+          form_json_data = VALUES(form_json_data)
+      `;
+
+        // Extract values from formData
+        const values = [
+            formData.subProjectId, formData.order_id,formData.name,formData.form_json, formData.form_json_data
+        ];
+
+     
+        // Execute the query
+        const [result] = await connection.execute(query, values);
+
+
+    } catch (error) {
+        if (connection) {
+            await connection.end(); // Ensure connection is closed in case of error
+        }
+        throw new Error(`Error fetching form fields: ${error.message}`);
+
+    }
+};
+
+
+
 module.exports = {
     fetchCompanyCategories,
     insertCustomerData,
@@ -401,8 +614,13 @@ module.exports = {
     fetchFilesByCustomerId,
     uploadFileService,
     updateDocStatus,
+
     fetchProjectDetail,
-    fetchProjects
+    fetchProjects,
+    fetchProjectForms,
+    insertSubProjectDetail,
+    updateSubProjectDetail,
+    fetchFormData
 
 
 }

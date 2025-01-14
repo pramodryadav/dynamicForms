@@ -82,7 +82,7 @@ const useMainForm = (next, preResponse) => {
                 }
 
             } catch (error) {
-                toast.error(error.message, toastOptions)
+                toast.error(error.message)
                 setLoading(false);
             }
 
@@ -98,7 +98,6 @@ const useMainForm = (next, preResponse) => {
         auditForm,
         categories,
         loading,
-        openBackdrop,
         formik,
         setButtonClicked,
 

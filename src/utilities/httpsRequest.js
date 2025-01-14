@@ -45,6 +45,7 @@ const postRequest = async (path, params) => {
         let res = await axios(axiosParams);
         return res;
     } catch (error) {
+       
         throw error
     }
 

@@ -37,10 +37,7 @@ const useCustomerDocs = (next, preResponse) => {
       }
    }
 
-   console.log("docForm", docForm);
-
-
-   console.log("custDocs", custDocs);
+ 
 
 
    const fetchDocForm = async (preResponse) => {
@@ -119,8 +116,6 @@ const useCustomerDocs = (next, preResponse) => {
 
    }
 
-   console.log("initialValues", initialValues);
-   console.log("custDoucments", custDoucments);
 
    const onChange = async (event, key) => {
 

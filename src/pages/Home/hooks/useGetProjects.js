@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getProjects } from "../../../services/projectService";
+import { getProjects } from "../../../services/subProjectService";
 import { toast } from "react-toastify";
 
 

@@ -1,8 +1,7 @@
 import { useCallback, useState } from "react";
 
-const useCreateUpdateSubProjects = (step) => {
+const useSubProjects = (step) => {
 
-    const [activeStep, setActiveStep] = useState(0);
     const [subProjectDetail, setSubProjectDetail] = useState(null);
     const [isProcessing, setIsProcessing] = useState(false);
     const [isCompleted, setIsCompleted] = useState(false);
@@ -14,12 +13,7 @@ const useCreateUpdateSubProjects = (step) => {
         setIsCreateNewItem(false);
     }
 
-    const handleReset = () => {
-
-        setSubProjectDetail(null);
-        setSelectedProject(null)
-
-    }
+ 
 
     const handleClickBack = () => {
 
@@ -36,14 +30,15 @@ const useCreateUpdateSubProjects = (step) => {
 
     const handleClickExistingItem = (data) => {
 
-        if (data.doc_status === "new") {
+
+        if (data.status === "draft") {
             setSubProjectDetail(data);
         }
-        if (data.doc_status === "processing") {
+        if (data.status === "in_process") {
             setIsProcessing(true);
         }
 
-        if (data.doc_status === "completed") {
+        if (data.status === "completed") {
             setIsCompleted(true);
         }
 
@@ -65,7 +60,6 @@ const useCreateUpdateSubProjects = (step) => {
         handleClickBack,
         subProjectDetail,
         handleClickExistingItem,
-        handleReset,
         handleCloseModal,
         isProcessing,
         isCompleted,
@@ -74,4 +68,4 @@ const useCreateUpdateSubProjects = (step) => {
     }
 }
 
-export default useCreateUpdateSubProjects
+export default useSubProjects

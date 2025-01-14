@@ -3,7 +3,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 
-const DynamicForm = ({ formik, config, categories, partners,onChange }) => {
+const DynamicForm = ({ formik, config, categories, partners, onChange }) => {
 
     // Render form fields based on configuration
 
@@ -31,11 +31,13 @@ const DynamicForm = ({ formik, config, categories, partners,onChange }) => {
             }
         };
 
-        switch (fieldConfig.type) {
+        switch (fieldConfig?.type) {
+
+
             case 'dataSelectorFromTable':
                 return (
                     <Grid key={key} item xs={12} md={6} className="fieldContainer">
-                        <Typography className="form-label" variant="body1" >{fieldConfig.label}</Typography>
+                        <Typography className="form-label" variant="body1" >{fieldConfig?.label}</Typography>
                         <select
                             name={key}
                             onBlur={formik.handleBlur}
@@ -43,9 +45,9 @@ const DynamicForm = ({ formik, config, categories, partners,onChange }) => {
                             onChange={formik.handleChange}
                             className="styledSelect"
                         >
-                            <option value="">Select {fieldConfig.label}</option>
+                            <option value="">Select {fieldConfig?.label}</option>
                             {getOptions(key).map((option) => (
-                                <option key={option.value } value={option.value }>
+                                <option key={option.value} value={option.value}>
                                     {option.title}
                                 </option>
                             ))}
@@ -58,10 +60,10 @@ const DynamicForm = ({ formik, config, categories, partners,onChange }) => {
                         }
                     </Grid>
                 );
-            case 'dataSelector':
+            case 'select':
                 return (
                     <Grid key={key} item xs={12} md={6} className="fieldContainer">
-                        <Typography className="form-label" variant="body1" >{fieldConfig.label}</Typography>
+                        <Typography className="form-label" variant="body1" >{fieldConfig?.label}</Typography>
                         <select
                             name={key}
                             value={formik.values[key] || ""}
@@ -69,10 +71,10 @@ const DynamicForm = ({ formik, config, categories, partners,onChange }) => {
                             onBlur={formik.handleBlur}
                             className="styledSelect"
                         >
-                            <option value="">Select {fieldConfig.label}</option>
-                            {getOptions(key).map((option) => (
+                            <option value="">Select {fieldConfig?.label}</option>
+                            {fieldConfig?.options?.map((option) => (
                                 <option key={option.value} value={option.value}>
-                                    {option.title}
+                                    {option.label}
                                 </option>
                             ))}
 
@@ -88,7 +90,7 @@ const DynamicForm = ({ formik, config, categories, partners,onChange }) => {
             case 'textarea':
                 return (
                     <Grid key={key} item xs={12} className="fieldContainer">
-                        <Typography className="form-label" variant="body1" >{fieldConfig.label}</Typography>
+                        <Typography className="form-label" variant="body1" >{fieldConfig?.label}</Typography>
                         <textarea
                             name={key}
                             id={key}
@@ -107,15 +109,15 @@ const DynamicForm = ({ formik, config, categories, partners,onChange }) => {
                 );
             case "file":
                 return <Grid key={key} item xs={12} md={6} className="fieldContainer">
-                    <Typography className="form-label" variant="body1" >{fieldConfig.label}</Typography>
+                    <Typography className="form-label" variant="body1" >{fieldConfig?.label}</Typography>
                     <input
 
                         name={key}
                         className="inputStyle"
                         type="file"
-                      
+
                         onBlur={formik.handleBlur}
-                        onChange={(e)=>onChange(e,key)}
+                        onChange={(e) => onChange(e, key)}
 
                     />
                     {formik.touched[key] && formik.errors[key] &&
@@ -126,12 +128,12 @@ const DynamicForm = ({ formik, config, categories, partners,onChange }) => {
                 </Grid>
             default:
                 return <Grid key={key} item xs={12} md={6} className="fieldContainer">
-                    <Typography className="form-label" variant="body1" >{fieldConfig.label}</Typography>
+                    <Typography className="form-label" variant="body1" >{fieldConfig?.label}</Typography>
                     <input
 
                         name={key}
                         className="inputStyle"
-                        type={fieldConfig.type || "text"}
+                        type={fieldConfig?.type || "text"}
                         value={formik.values[key] || ""}
                         onBlur={formik.handleBlur}
                         onChange={formik.handleChange}

@@ -52,6 +52,52 @@ const updateDocStatusSchema = Joi.object({
     status: Joi.string().required(),
 });
 
+const getFormDataSchema = Joi.object({
+    order_id: Joi.number().integer().required(),  // Validate 'id' as a required string
+    sub_project_id: Joi.number().integer().required(),
+});
+
+
+
+const formSubmissionSchema = Joi.object({
+    // Fields for insertSubProjectDetail
+    data_project_id: Joi.number().integer().required(),    // Required integer
+    project_title: Joi.string().required(),               // Required string
+    status: Joi.string().valid("draft", "in_process","complete").required(), // Required specific string values
+                 // Required string
+
+    // Fields for insertSubProjectFormData
+    project_detail_id: Joi.number().integer().optional(), // Optional integer
+    order_id: Joi.number().integer().required(),          // Required integer
+    name: Joi.string().required(),                        // Required string
+    form_json: Joi.object().required(),                   // Required JSON object
+    form_json_data: Joi.object().required(),              // Required JSON object
+});
+
+
+const formUpdateSchema = Joi.object({
+    // Fields for insertSubProjectDetail
+    data_project_id: Joi.number().integer().required(),    // Required integer
+    project_title: Joi.string().required(),               // Required string
+    status: Joi.string().valid("draft", "in_process","complete").required(), // Required specific string values
+                 // Required string
+
+    // Fields for insertSubProjectFormData
+    project_detail_id: Joi.number().integer().optional(), // Optional integer
+    order_id: Joi.number().integer().required(),          // Required integer
+    name: Joi.string().required(),                        // Required string
+    form_json: Joi.object().required(),                   // Required JSON object
+    form_json_data: Joi.object().required(),
+    subProjectId: Joi.number().integer().required()             // Required JSON object
+});
+
+
+
+
+const getProjectFormSchema = Joi.object({
+    projectID: Joi.number().integer().required(),  // Validate 'id' as a required string
+});
+
 
 const companyCategriesSchema = Joi.object({
     groupid: Joi.string().required(),  // Validate 'groupid' as a required string
@@ -158,8 +204,7 @@ const uploadSchema = Joi.object({
 
 // Middleware for validation
 const validate = (schema, target = 'body') => (req, res, next) => {
-    console.log("body",req.body);
-    
+   
     const { error } = schema.validate(req[target]);
     if (error) {
         return res.status(400).json({ status: "error", message: error.details[0].message });
@@ -176,6 +221,11 @@ module.exports = {
     infoFormSchema,
     updateCustomerInfoSchema,
     uploadSchema,
-    updateDocStatusSchema
+    updateDocStatusSchema,
+
+    getProjectFormSchema,
+    formSubmissionSchema,
+    getFormDataSchema,
+    formUpdateSchema
 
 }
