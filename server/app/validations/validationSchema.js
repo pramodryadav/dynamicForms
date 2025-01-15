@@ -18,7 +18,7 @@ const updateCustomerInfoSchema = Joi.object({
     id: Joi.number().integer().required(),  // Ensure 'id' is a required integer
     category: Joi.string().valid('pvt_ltd', 'public_ltd', 'mnc', 'partnership', 'propreitorship', 'govt_semi_govt_enterprise', 'other').required(),  // Ensure 'category' is valid
     formData: Joi.object({
-    
+
         // Conditional validation for the 'formData' fields
         gst_no: Joi.string().pattern(/^[0-9]{5,}$/).when('category', { // Example GST validation: minimum 5 digits
             is: 'pvt_ltd',  // If category is 'pvt_ltd', then this field is required
@@ -63,8 +63,8 @@ const formSubmissionSchema = Joi.object({
     // Fields for insertSubProjectDetail
     data_project_id: Joi.number().integer().required(),    // Required integer
     project_title: Joi.string().required(),               // Required string
-    status: Joi.string().valid("draft", "in_process","complete").required(), // Required specific string values
-                 // Required string
+    status: Joi.string().valid("draft", "in_process", "complete").required(), // Required specific string values
+    // Required string
 
     // Fields for insertSubProjectFormData
     project_detail_id: Joi.number().integer().optional(), // Optional integer
@@ -79,8 +79,8 @@ const formUpdateSchema = Joi.object({
     // Fields for insertSubProjectDetail
     data_project_id: Joi.number().integer().required(),    // Required integer
     project_title: Joi.string().required(),               // Required string
-    status: Joi.string().valid("draft", "in_process","complete").required(), // Required specific string values
-                 // Required string
+    status: Joi.string().valid("draft", "in_process", "complete").required(), // Required specific string values
+    // Required string
 
     // Fields for insertSubProjectFormData
     project_detail_id: Joi.number().integer().optional(), // Optional integer
@@ -194,17 +194,23 @@ const updateCustomerSchema = Joi.object({
 
 // Validation schema for the upload request
 const uploadSchema = Joi.object({
-    id: Joi.number().integer().required(), // or Joi.number().integer().required() if ID is a number
-    field: Joi.string().required(),
+    subProjectId: Joi.number().integer().required(), // or Joi.number().integer().required() if ID is a number
+    orderId: Joi.number().integer().required(),
+    fileName: Joi.string().required(),
     file: Joi.object().keys({
         filepath: Joi.string().required(),
         originalFilename: Joi.string().required(),
     }).required(),
 });
 
+const getFilesSchema = Joi.object({
+    subProjectId: Joi.number().integer().required(), // or Joi.number().integer().required() if ID is a number
+    orderId: Joi.number().integer().required(),
+});
+
 // Middleware for validation
 const validate = (schema, target = 'body') => (req, res, next) => {
-   
+
     const { error } = schema.validate(req[target]);
     if (error) {
         return res.status(400).json({ status: "error", message: error.details[0].message });
@@ -226,6 +232,7 @@ module.exports = {
     getProjectFormSchema,
     formSubmissionSchema,
     getFormDataSchema,
-    formUpdateSchema
+    formUpdateSchema,
+    getFilesSchema
 
 }

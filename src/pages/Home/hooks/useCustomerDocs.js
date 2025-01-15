@@ -19,23 +19,7 @@ const useCustomerDocs = (next, preResponse) => {
 
 
 
-   useEffect(() => {
-      if (preResponse.id) {
-         fetchCustDocByID(preResponse.id)
-      }
-   }, [preResponse.id]);
-
-   const fetchCustDocByID = async (id) => {
-      try {
-         const params = { id };
-         setLoading(true);
-         const res = await getCustFilesByID(params);
-         setLoading(false);
-         setCustDocs(res?.data?.data);
-      } catch (error) {
-         setLoading(false);
-      }
-   }
+ 
 
  
 
@@ -134,7 +118,7 @@ const useCustomerDocs = (next, preResponse) => {
          const formData = new FormData();
          formData.append('file', file);
          formData.append('id', id);
-         formData.append('field', key);
+         formData.append('fileName', key);
          setLoading(true);
          const res = await uploadFile(formData);
          fetchCustDocByID(id);

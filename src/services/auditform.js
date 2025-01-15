@@ -18,18 +18,7 @@ const getCustomerByID = async (params = {}) => {
 }
 
 
-const getCustFilesByID = async (params = {}) => {
-    try {
 
-        const response = await getRequest(API_ENDPOINTS["get-files"], params);
-        return response;
-
-    } catch (err) {
-        let error = err.response ? err.response.data : err;
-        throw error
-    }
-
-}
 
 
 const getCustomerInfoByID = async (params = {}) => {
@@ -168,7 +157,6 @@ export {
     getCustomerByID,
     updateMainForm,
     getCustomerInfoByID,
-    getCustFilesByID,
     updateDocStatus,
 
     

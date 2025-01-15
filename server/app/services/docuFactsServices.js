@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const connectDB = require("../config/db");
 const { applyDefaultValues } = require("../utils/customerTblDefaultValues");
+const mime = require('mime-types')
 
 const fetchProjectDetail = async () => {
     try {
@@ -348,18 +349,21 @@ const updateCustomerData = async (formData) => {
     }
 };
 
-const fetchFilesByCustomerId = async (customerId) => {
+const fetchFiles = async (subProjectId, order_id) => {
 
     try {
 
         // Construct the folder path using the customer ID
-        const folderPath = path.join(__dirname, '../customerdata', `customer${customerId}`);
+        const folderPath = path.join(__dirname, '../subProjectDocs', `subProject_${subProjectId}_${order_id}`);
+      
+
 
         // Check if the folder exists
         if (!fs.existsSync(folderPath)) {
             // Throw a custom error for folder not found with 404 status
-            const error = new Error(`No folder found for customer ID: ${customerId}`);
+            const error = new Error(`No folder found for subProject ID: ${subProjectId}`);
             error.statusCode = 404;  // Custom status code for not found
+
 
             throw error;
         }
@@ -369,40 +373,50 @@ const fetchFilesByCustomerId = async (customerId) => {
 
         // If you need the full paths of the files, you can map the file names to their full paths
         // const filePaths = files.map(file => path.join(folderPath, file));
-        const filePaths = files.map(file => `/cust-docs/customer${customerId}/${file}`);
+        // Build file paths and include MIME types
+        const fileDetails = files.map((file) => {
+            const fullPath = `/subProject-docs/subProject_${subProjectId}_${order_id}/${file}`;
+            const mimeType = mime.lookup(file) || 'application/octet-stream';
+            return { url: fullPath, name: file, mimeType };
+        });
 
-        return filePaths;
+        return fileDetails;
     } catch (error) {
+  
+
         throw error
     }
 }
 
 
-const uploadFileService = async (file, id, field) => {
-    const customerDir = path.join(__dirname, '..', 'customerdata', `customer${id}`);
+const uploadFileService = async (file, subProjectId, orderId, fileName) => {
+    const subProjectDir = path.join(__dirname, '..', 'subProjectDocs', `subProject_${subProjectId}_${orderId}`);
 
     // Check if directory exists, create if not
-    if (!fs.existsSync(customerDir)) {
-        fs.mkdirSync(customerDir, { recursive: true });
+    if (!fs.existsSync(subProjectDir)) {
+        fs.mkdirSync(subProjectDir, { recursive: true });
     }
 
     let existingFiles;
     try {
         // Read existing files in the customer directory
-        existingFiles = await fs.promises.readdir(customerDir);
+        existingFiles = await fs.promises.readdir(subProjectDir);
     } catch (err) {
         throw new Error('Failed to read directory');
     }
 
+
+    
+
     // Filter existing files that start with the field name
     const filesToDelete = existingFiles.filter(existingFile => {
-        const preField = existingFile.split("-")[0];
-        return preField === field;
+        const preFileName = existingFile.split("-")[0];
+        return preFileName === fileName;
     });
 
     // Delete the files asynchronously
     for (const existingFile of filesToDelete) {
-        const filePath = path.join(customerDir, existingFile);
+        const filePath = path.join(subProjectDir, existingFile);
         try {
             await fs.promises.unlink(filePath);
         } catch (err) {
@@ -412,7 +426,7 @@ const uploadFileService = async (file, id, field) => {
 
     // Move the new file
     const oldPath = file.filepath;
-    const newPath = path.join(customerDir, `${field}-${file.originalFilename}`);
+    const newPath = path.join(subProjectDir, `${fileName}-${file.originalFilename}`);
 
     try {
         await fs.promises.rename(oldPath, newPath);
@@ -434,9 +448,9 @@ const insertSubProjectDetail = async (formData) => {
 
 
         connection = await connectDB();
-       
-         // Construct the SQL query using INSERT ... ON DUPLICATE KEY UPDATE
-         const query = `
+
+        // Construct the SQL query using INSERT ... ON DUPLICATE KEY UPDATE
+        const query = `
          INSERT INTO projects_detail (
              data_project_id, project_title, status
          ) VALUES (?, ?, ?)
@@ -475,7 +489,7 @@ const updateSubProjectDetail = async (formData) => {
     let connection;
     try {
 
-       
+
 
         connection = await connectDB();
         // formData = {
@@ -497,7 +511,7 @@ const updateSubProjectDetail = async (formData) => {
             formData.project_title, formData.status, formData.subProjectId
         ];
 
-       
+
         // Execute the query
         const [result] = await connection.execute(query, values);
 
@@ -508,7 +522,7 @@ const updateSubProjectDetail = async (formData) => {
 
         return { subProjectId: formData.subProjectId };
     } catch (error) {
-       
+
         if (connection) {
             await connection.end(); // Ensure connection is closed in case of error
         }
@@ -557,7 +571,7 @@ const insertSubProjectFormData = async (formData, connection) => {
 const updateSubProjectFormData = async (formData, connection) => {
     try {
 
-    
+
 
 
         // formData = {
@@ -583,10 +597,10 @@ const updateSubProjectFormData = async (formData, connection) => {
 
         // Extract values from formData
         const values = [
-            formData.subProjectId, formData.order_id,formData.name,formData.form_json, formData.form_json_data
+            formData.subProjectId, formData.order_id, formData.name, formData.form_json, formData.form_json_data
         ];
 
-     
+
         // Execute the query
         const [result] = await connection.execute(query, values);
 
@@ -611,7 +625,7 @@ module.exports = {
     fetchCustomerByID,
     updateCustomerData,
     fetchCustomerInfoByID,
-    fetchFilesByCustomerId,
+    fetchFiles,
     uploadFileService,
     updateDocStatus,
 

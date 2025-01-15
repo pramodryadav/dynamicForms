@@ -70,7 +70,18 @@ const updateForm = async (params = {}) => {
 
 }
 
+const getSubProjectFiles = async (params = {}) => {
+    try {
 
+        const response = await getRequest(API_ENDPOINTS["get-files"], params);
+        return response;
+
+    } catch (err) {
+        let error = err.response ? err.response.data : err;
+        throw error
+    }
+
+}
 
 const getFromJSONData = async (params = {}) => {
     try {
@@ -86,7 +97,18 @@ const getFromJSONData = async (params = {}) => {
 
 }
 
+const uploadFile = async (params = {}) => {
+    try {
+       
+        const response = await postRequest(API_ENDPOINTS["upload-file"], params);
+        return response;
 
+    } catch (err) {
+        let error = err.response ? err.response.data : err;
+        throw error
+    }
+
+}
 
 
 export {
@@ -95,6 +117,8 @@ export {
     getProjectForms,
     submitForm,
     getFromJSONData,
-    updateForm
+    updateForm,
+    getSubProjectFiles,
+    uploadFile
 
 }

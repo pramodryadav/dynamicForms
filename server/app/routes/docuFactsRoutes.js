@@ -9,7 +9,7 @@ const {
     getCustomerByID,
     handleUpdateMainForm,
     getCustomerInfoByID,
-    getCustomerFiles,
+    getSubProjectFiles,
     updateDocumentStatus,
 
     getProjectDetail,
@@ -33,7 +33,8 @@ const {
     getProjectFormSchema,
     formSubmissionSchema,
     getFormDataSchema,
-    formUpdateSchema
+    formUpdateSchema,
+    getFilesSchema
 } = require("../validations/validationSchema")
 
 
@@ -46,13 +47,15 @@ router.post('/mainform-update', validate(updateCustomerSchema), handleUpdateMain
 router.get('/info-form', validate(infoFormSchema, "query"), getInfoForm);
 router.get('/doc-form', getDocForm);
 router.post('/info-form-update', validate(updateCustomerInfoSchema), handleUpdateInfoForm);
-router.post('/upload-file', uploadFile);
+
 router.get('/get-customerById', validate(customerIdSchema, "query"), getCustomerByID);
 router.get('/get-customerInfoById', validate(customerIdSchema, "query"), getCustomerInfoByID);
-
-router.get('/get-customer-files', validate(customerIdSchema, "query"), getCustomerFiles);
 router.post('/update-docs-status', validate(updateDocStatusSchema), updateDocumentStatus);
 
+//above routes not being used anymore
+
+router.get('/get-subProject-files', validate(getFilesSchema, "query"), getSubProjectFiles);
+router.post('/upload-file', uploadFile);
 router.get('/get-projects-detail', getProjectDetail);
 router.get('/list-projects', getProjects);
 router.get('/project-forms', validate(getProjectFormSchema, "query"), getProjectForms);

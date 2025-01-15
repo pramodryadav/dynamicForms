@@ -10,7 +10,7 @@ const {
     updateCustomerInfo,
     fetchCustomerInfoByID,
     updateCustomerData,
-    fetchFilesByCustomerId,
+    fetchFiles,
     uploadFileService,
     updateDocStatus,
 
@@ -48,7 +48,7 @@ const getProjects = async (req, res) => {
 
 const getProjectForms = async (req, res) => {
     try {
-        const { projectID } = req.query; 
+        const { projectID } = req.query;
 
         const docsStatus = await fetchProjectForms(projectID);
         res.status(200).json({ status: "success", data: docsStatus });
@@ -128,7 +128,7 @@ const getCompanyCategories = async (req, res) => {
 const getFormData = async (req, res) => {
 
     try {
-      
+
         const { order_id, sub_project_id } = req.query;
         const docForm = await fetchFormData(order_id, sub_project_id);
         res.status(200).json({ status: "success", data: docForm });
@@ -231,7 +231,7 @@ const updateDocumentStatus = async (req, res) => {
 
 const uploadFile = async (req, res) => {
     const form = new formidable.IncomingForm();
-    form.uploadDir = path.join(__dirname, '..', 'customerdata');
+    form.uploadDir = path.join(__dirname, '..', 'subProjectDocs');
     form.keepExtensions = true;
 
     form.parse(req, async (err, fields, files) => {
@@ -240,24 +240,33 @@ const uploadFile = async (req, res) => {
         }
 
         const file = files?.file?.[0];
-        const id = fields?.id?.[0];
-        const field = fields?.field?.[0];
+        const subProjectId = fields?.subProjectId?.[0];
+        const orderId = fields?.orderId?.[0];
+        const fileName = fields?.fileName?.[0];
         const { error } = uploadSchema.validate({
-            id,
-            field,
+            subProjectId,
+            orderId,
+            fileName,
             file: {
                 filepath: files?.file?.[0]?.filepath,
                 originalFilename: files?.file?.[0]?.originalFilename,
             },
         });
 
-
+     
         if (error) {
             return res.status(400).json({ error: error.details[0].message });
         }
 
-        if (!id) {
-            return res.status(400).json({ error: 'ID is required' });
+        if (!subProjectId) {
+            return res.status(400).json({ error: 'SubProject ID is required' });
+        }
+
+        if (!orderId) {
+            return res.status(400).json({ error: 'Order ID is required' });
+        }
+        if (!fileName) {
+            return res.status(400).json({ error: 'File Name is required' });
         }
 
         if (!file || !file.filepath || !file.originalFilename) {
@@ -265,9 +274,11 @@ const uploadFile = async (req, res) => {
         }
 
         try {
-            const result = await uploadFileService(file, id, field);
+            const result = await uploadFileService(file, subProjectId, orderId, fileName);
             res.status(200).json({ status: "success", data: result });
         } catch (error) {
+            
+            
             res.status(500).json({ status: "error", error: error.message });
         }
     });
@@ -277,11 +288,11 @@ const uploadFile = async (req, res) => {
 
 
 
-const getCustomerFiles = async (req, res) => {
+const getSubProjectFiles = async (req, res) => {
     try {
 
-        const { id } = req.query;
-        const docForm = await fetchFilesByCustomerId(id);
+        const { subProjectId, orderId } = req.query;
+        const docForm = await fetchFiles(subProjectId, orderId);
         res.status(200).json({ status: "success", data: docForm });
 
     } catch (error) {
@@ -306,7 +317,7 @@ module.exports = {
     getCustomerByID,
     handleUpdateMainForm,
     getCustomerInfoByID,
-    getCustomerFiles,
+    getSubProjectFiles,
     updateDocumentStatus,
 
     getProjectDetail,

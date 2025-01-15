@@ -1,11 +1,14 @@
 import React from 'react';
-import { Grid, Button, Box, Typography } from '@mui/material';
+import { Grid, Button, Box, Typography, IconButton } from '@mui/material';
 import DynamicForm from '../../../components/DynamicForm';
-import useCustomerMainForm from '../hooks/useCustomerMainForm';
+import ImageIcon from '@mui/icons-material/Image';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import Loader from '../../../components/Loader';
 import BackDrop from '../../../components/BackDrop';
 import useForm from '../hooks/useForm';
 import Modal from '../../../components/Modal';
+import { capitalizeString } from '../../../utilities/capitalizeString';
+import getFileIcon from '../../../utilities/GetFileIcon';
 
 function Form({
     back,
@@ -26,10 +29,12 @@ function Form({
         setButtonClicked,
         onConfirm,
         closeModal,
-        showConfirm
-    } = useForm(next, preResponse, formFields, project_id, formDetail, sub_project_name,currentStep,isLastStep);
+        showConfirm,
+        subProjectDoucments,
+        handleChangeFile
+    } = useForm(next, preResponse, formFields, project_id, formDetail, sub_project_name, currentStep, isLastStep);
 
-  
+
 
     return (
         <>
@@ -40,8 +45,27 @@ function Form({
                     <DynamicForm
                         config={formFields}
                         formik={formik}
+                        handleChangeFile={handleChangeFile}
                     />
-                    <Grid item xs={12} display="flex" justifyContent={currentStep !== 1 ? "space-between": "end"} columnGap={1}>
+
+                    {
+                        Object.keys(subProjectDoucments).length > 0 ? Object.keys(subProjectDoucments).map((key) => {
+                            const fileInfo = subProjectDoucments[key];
+
+                            return <Grid key={fileInfo?.url} item xs={12} md={6}>
+                                <Typography className="form-label" variant="body1">{capitalizeString(key)}</Typography>
+                                <IconButton onClick={() => window.open(fileInfo?.url, '_blank')}>
+                                    {
+                                        getFileIcon(fileInfo?.mimeType)
+                                    }
+                                </IconButton>
+                            </Grid>
+
+
+
+                        }) : null
+                    }
+                    <Grid item xs={12} display="flex" justifyContent={currentStep !== 1 ? "space-between" : "end"} columnGap={1}>
                         {currentStep !== 1 && <Button variant="contained" onClick={() => back(preResponse)}>Previous</Button>}
                         <Box display="flex" columnGap={1}>
                             <Button

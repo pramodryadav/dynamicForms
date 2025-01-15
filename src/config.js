@@ -14,7 +14,7 @@ export const CONFIG = {
         "info-form": "/docufacts/info-form",
         "doc-form": "/docufacts/doc-form",
         "upload-file": "/docufacts/upload-file",
-        "get-files": "/docufacts/get-customer-files",
+        "get-files": "/docufacts/get-subProject-files",
         "info-form-update": "/docufacts/info-form-update",
         "get-app-data": "/app/app-data",
         "update-doc-status": "/docufacts/update-docs-status",

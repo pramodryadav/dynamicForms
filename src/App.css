@@ -1069,6 +1069,12 @@
   margin-bottom: 10px;
 }
 
+.fileIcon{
+  max-width: 50px;
+  width: 100%;
+  height: auto;
+}
+
 .homeICon{
   font-size: 36px;
   color: #6242bd;

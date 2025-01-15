@@ -3,7 +3,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 
-const DynamicForm = ({ formik, config, categories, partners, onChange }) => {
+const DynamicForm = ({ formik, config, handleChangeFile }) => {
 
     // Render form fields based on configuration
 
@@ -13,9 +13,9 @@ const DynamicForm = ({ formik, config, categories, partners, onChange }) => {
         const getOptions = (key) => {
             switch (key) {
                 case 'category':
-                    return categories;
+                    return [];
                 case 'partners':
-                    return partners;
+                    return [];
                 case 'blacklist':
                     return [
                         { title: "False", value: "false" },
@@ -117,7 +117,7 @@ const DynamicForm = ({ formik, config, categories, partners, onChange }) => {
                         type="file"
 
                         onBlur={formik.handleBlur}
-                        onChange={(e) => onChange(e, key)}
+                        onChange={(e) => handleChangeFile(e, key)}
 
                     />
                     {formik.touched[key] && formik.errors[key] &&

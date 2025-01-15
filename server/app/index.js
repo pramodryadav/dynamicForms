@@ -22,11 +22,11 @@ app.use((err, req, res, next) => {
 // API routes
 
 app.use('/api/auth', authRoutes); //append docufacts for development environment
-app.use('/docufacts/api/docufacts', auditRoutes); //append docufacts for development environment
-app.use('/docufacts/api/app', appDataRoutes); //append docufacts for development environment
+app.use('/api/docufacts', auditRoutes); //append docufacts for development environment
+app.use('/api/app', appDataRoutes); //append docufacts for development environment
 
 // serving the react app and static files
-app.use('/cust-docs', express.static(path.join(__dirname, './customerdata')));
+app.use('/subProject-docs', express.static(path.join(__dirname, './subProjectDocs')));
 
 app.use("/", express.static(path.join(__dirname, '../../build'))); //append docufacts for development environment
 

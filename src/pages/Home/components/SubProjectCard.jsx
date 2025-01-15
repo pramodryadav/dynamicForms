@@ -24,7 +24,7 @@ const icons = {
   completed: <VisibilityIcon fontSize="small" />
 }
 
-const CustomerCard = ({ customer }) => {
+const SubProjectCard = ({ customer }) => {
 
   return (
     <Card className={`customerCard ${border[customer?.status]}`}>
@@ -54,4 +54,4 @@ const CustomerCard = ({ customer }) => {
   );
 };
 
-export default CustomerCard;
+export default SubProjectCard;

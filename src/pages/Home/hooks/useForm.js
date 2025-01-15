@@ -8,12 +8,15 @@ import { updateFormInitialValues } from "../../../utilities/updateFormInitialVal
 import { toast } from "react-toastify";
 import { getToastOptions } from "../../../utilities/generateToasOptions";
 import { submitForm, getFromJSONData, updateForm } from "../../../services/subProjectService";
+import { getSubProjectFiles } from "../../../services/subProjectService";
+import { uploadFile } from "../../../services/subProjectService";
 
 const useForm = (next, preResponse, formFields, project_id, formDetail, sub_project_name, currentStep, isLastStep) => {
+
     const [openBackdrop, setOpenBackdrop] = useState(false);
     const [buttonClicked, setButtonClicked] = useState("");
     const [showConfirm, setShowConfirm] = useState(false);
-
+    const [subProjectDocs, setSubProjectDocs] = useState({});
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({});
 
@@ -46,7 +49,26 @@ const useForm = (next, preResponse, formFields, project_id, formDetail, sub_proj
             fetchFromJSONData(params)
         }
 
-    }, [subProjectId, formDetail?.order_id])
+    }, [subProjectId, formDetail?.order_id]);
+
+
+    useEffect(() => {
+        if (subProjectId && formDetail?.order_id) {
+            fetchSubProjectDocs({ subProjectId, orderId: formDetail?.order_id })
+        }
+    }, [subProjectId, formDetail?.order_id]);
+
+    const fetchSubProjectDocs = async (params) => {
+        try {
+
+            setLoading(true);
+            const res = await getSubProjectFiles(params);
+            setLoading(false);
+            setSubProjectDocs(res?.data?.data);
+        } catch (error) {
+            setLoading(false);
+        }
+    }
 
     const fetchFromJSONData = async (params) => {
         try {
@@ -63,7 +85,8 @@ const useForm = (next, preResponse, formFields, project_id, formDetail, sub_proj
 
     console.log("formData", formData);
 
-
+    const baseUrl = `${window.location.origin}`;
+    const subProjectDoucments = {};
     const { initialValues, validationSchema } = initalizeForm(formFields, {}, {});
     console.log("formFields", formFields);
 
@@ -106,6 +129,7 @@ const useForm = (next, preResponse, formFields, project_id, formDetail, sub_proj
         }
     });
 
+    console.log("formik", formik.values);
 
     const submitFormData = async (values) => {
         try {
@@ -132,6 +156,21 @@ const useForm = (next, preResponse, formFields, project_id, formDetail, sub_proj
         }
     }
 
+
+    if (subProjectDocs.length > 0) {
+        subProjectDocs.reduce((acc, eachDoc) => {
+            const fileName = eachDoc?.url.split("/").pop().split("-")[0];
+
+            const fullUrl = `${baseUrl + eachDoc?.url}`;
+
+            initialValues[fileName] = fullUrl;
+            subProjectDoucments[fileName] = { ...eachDoc, url: fullUrl };
+
+        }, subProjectDoucments)
+    } else {
+
+    }
+
     // fetch form and value for field categroy together
 
     const onConfirm = async () => {
@@ -146,9 +185,47 @@ const useForm = (next, preResponse, formFields, project_id, formDetail, sub_proj
 
     }
 
+
+    const handleChangeFile = async (event, key) => {
+
+        try {
+
+            const file = event.target.files[0];
+
+            if (!file) {
+                toast.error('Please select a file to upload.');
+                return;
+            }
+            formik.setFieldValue(`${key}`, file);
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('subProjectId', subProjectId);
+            formData.append('orderId', formDetail?.order_id);
+            formData.append('fileName', key);
+            setLoading(true);
+            const res = await uploadFile(formData);
+            fetchSubProjectDocs({ subProjectId, orderId: formDetail?.order_id });
+            setLoading(false);
+
+
+            if (res.data.status === "success") {
+
+                toast.success(res.data.message);
+
+            } else {
+                toast.success(res.data.message)
+            }
+        } catch (error) {
+            setLoading(false);
+        }
+    }
+
     const closeModal = () => {
         setShowConfirm(false);
     }
+
+    console.log("subProjectDoucments", subProjectDoucments);
+
 
     return {
 
@@ -158,7 +235,9 @@ const useForm = (next, preResponse, formFields, project_id, formDetail, sub_proj
         setButtonClicked,
         onConfirm,
         closeModal,
-        showConfirm
+        showConfirm,
+        subProjectDoucments,
+        handleChangeFile
 
     }
 }

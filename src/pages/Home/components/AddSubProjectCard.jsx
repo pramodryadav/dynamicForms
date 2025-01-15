@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Typography, IconButton, Box } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
-const AddCustomerCard = ({ handleClickNewItem }) => {
+const AddSubProjectCard = ({ handleClickNewItem }) => {
   return (
     <Card className="addCustomerCard gray-top-border" onClick={handleClickNewItem}>
       <Box className="flex justify-space-between">
@@ -21,4 +21,4 @@ const AddCustomerCard = ({ handleClickNewItem }) => {
   );
 };
 
-export default AddCustomerCard;
+export default AddSubProjectCard;

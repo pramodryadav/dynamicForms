@@ -9,8 +9,8 @@ import Modal from '../../../components/Modal';
 import processingImg from "../../../assets/images/process.png"
 import SearchIcon from '@mui/icons-material/Search';
 import useFilterItems from '../hooks/useFilterItems';
-import AddCustomerCard from './AddCustomerCard';
-import CustomerCard from './CustomerCard';
+import AddSubProjectCard from './AddSubProjectCard';
+import SubProjectCard from './SubProjectCard';
 import useGetsubProjects from '../hooks/useGetSubProjects';
 import Loader from '../../../components/Loader';
 
@@ -122,7 +122,7 @@ const SubProjects = ({
 
 
                 <Grid item xs={12} sm={6} md={3} >
-                    <AddCustomerCard handleClickNewItem={handleClickNewItem} />
+                    <AddSubProjectCard handleClickNewItem={handleClickNewItem} />
                 </Grid>
 
 
@@ -134,7 +134,7 @@ const SubProjects = ({
                             onClick={() => handleClickExistingItem(customer)}
                             key={customer.id}
                         >
-                            <CustomerCard customer={customer} />
+                            <SubProjectCard customer={customer} />
                         </Grid>
                     ))}
             </Grid>
