@@ -24,28 +24,28 @@ const icons = {
   completed: <VisibilityIcon fontSize="small" />
 }
 
-const SubProjectCard = ({ customer }) => {
+const SubProjectCard = ({ subProject }) => {
 
   return (
-    <Card className={`customerCard ${border[customer?.status]}`}>
+    <Card className={`customerCard ${border[subProject?.status]}`}>
 
 
       <Box className="flex justify-space-between">
         <Typography variant="h6" className="customerName">
-          {customer.project_title}
+          {subProject.project_title}
         </Typography>
         <IconButton className="editIcon">
-       { icons[customer?.status]}
+       { icons[subProject?.status]}
         </IconButton>
 
       </Box>
 
       <Typography variant="body2" className={`customerStatus`}>
-        Status: <span className={`${text[customer?.status]}`}>{capitalizeString(customer.status)}</span>
+        Status: <span className={`${text[subProject?.status]}`}>{capitalizeString(subProject.status)}</span>
       </Typography>
       <Box className="flex justify-end">
         <Typography variant="body2" className="customerStatus">
-          Date: {dayjs(customer.edited_on).format("DD-MM-YYYY")}
+          Date: {dayjs(subProject.edited_on).format("DD-MM-YYYY")}
         </Typography>
       </Box>
 

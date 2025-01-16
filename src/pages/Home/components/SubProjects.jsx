@@ -40,7 +40,7 @@ const SubProjects = ({
             <Loader open={loading} />
             <Grid container className="m-b-20 flex row-gap-10 col-gap-10  search-filter-container">
                 {/* <Grid item xs={4} sm={2} md={1.5} lg={1}>  <Button fullWidth variant="contained" startIcon={<SearchIcon />}>Search</Button></Grid> */}
-                <Grid item xs={12} md={3} className="earch-filter-container">
+                <Grid item xs={12} md={3} className="">
 
 
 
@@ -55,7 +55,7 @@ const SubProjects = ({
                         InputProps={{
                             startAdornment: (
                               <InputAdornment position="start">
-                                <SearchIcon sx={{ color: '#6242bd' }} />
+                                <SearchIcon className="iconColor" />
                               </InputAdornment>
                             ),
                           }}
@@ -63,23 +63,17 @@ const SubProjects = ({
 
                 </Grid >
 
-                <Grid item xs={4} sm={2} md={1.5} lg={1}>
-                    <Button fullWidth variant="contained" startIcon={<FilterAltIcon />}>Filter</Button>
-                </Grid>
-                <Grid item xs={12} md={2} lg={2.5} className="earch-filter-container">
-
-
-
+           
+                <Grid item xs={12} md={2} lg={2.5} className=" position-relative">
 
                     {/* <Typography>Project:</Typography> */}
                     <Select
-
-
                         value={selectedProject}
                         fullWidth
                         size="small"
                         onChange={handleChangeProject}
                         displayEmpty
+                        sx={{pl:3}}
                     >
                         <MenuItem value="">Project Type</MenuItem>
                         {
@@ -91,8 +85,10 @@ const SubProjects = ({
 
                     </Select>
 
+                    <FilterAltIcon className="position-absolute iconColor filterIconPosition " />
+
                 </Grid>
-                <Grid item xs={12} md={2} lg={2.5} className="earch-filter-container">
+                <Grid item xs={12} md={2} lg={2.5} className="position-relative">
 
                     <Select
 
@@ -101,6 +97,8 @@ const SubProjects = ({
                         onChange={handleChangeStatus}
                         displayEmpty
                         size="small"
+                        sx={{pl:3}}
+                       
 
                     >
                         <MenuItem value="">Status</MenuItem>
@@ -108,7 +106,7 @@ const SubProjects = ({
                         <MenuItem value={"in_process"}>In Process</MenuItem>
                         <MenuItem value={"completed"}>Copmpleted</MenuItem>
                     </Select>
-
+                    <FilterAltIcon className="position-absolute iconColor filterIconPosition " />
 
                 </Grid>
                 <Grid item xs={4} sm={2} md={1.5} lg={1}>
@@ -127,14 +125,14 @@ const SubProjects = ({
 
 
                 {Array.isArray(searchedsubProjects) &&
-                    searchedsubProjects.map((customer) => (
+                    searchedsubProjects.map((subProject) => (
                         <Grid
                             item
                             xs={12} sm={6} md={3}
-                            onClick={() => handleClickExistingItem(customer)}
-                            key={customer.id}
+                            onClick={() => handleClickExistingItem(subProject)}
+                            key={subProject.id}
                         >
-                            <SubProjectCard customer={customer} />
+                            <SubProjectCard subProject={subProject} />
                         </Grid>
                     ))}
             </Grid>

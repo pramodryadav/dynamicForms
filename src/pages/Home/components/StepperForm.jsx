@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Stepper, Step, StepLabel, Typography, Grid, TextField, Button } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import WestIcon from '@mui/icons-material/West';
 import SuccessMsg from './SuccessMsg';
 import useStepperForm from '../hooks/useStepperForm';
 import Loader from '../../../components/Loader';
@@ -19,7 +20,7 @@ const StepperForm = ({ handleClickBack, subProjectDetail, selectedProject }) => 
     return (
         <>
             <Loader open={loading} />
-            <Button variant='contained' onClick={handleClickBack}>Back</Button>
+            <Button startIcon={<WestIcon/>} variant='contained' onClick={handleClickBack}>Back</Button>
             <Box
                 sx={{
                     padding: '20px',

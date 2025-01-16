@@ -173,6 +173,20 @@
   position: relative;
 }
 
+.position-absolute {
+  position: absolute;
+}
+
+.filterIconPosition{
+  left: 8px;
+  top: 8px;
+ 
+}
+
+.iconColor{
+  color: #6242bd
+}
+
 .loginLogo {
   max-width: 275px;
   display: block;
